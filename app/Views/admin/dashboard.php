@@ -130,7 +130,27 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-
+                                        <?php if (!empty($reports)): ?>
+                                            <?php foreach ($reports as $report): ?>
+                                                <tr class="text-nowrap">
+                                                    <td class="ps-3"><?= esc($report['id']) ?></td>
+                                                    <td><?= esc($report['item_name']) ?></td>
+                                                    <td><?= esc($report['report_type']) ?></td>
+                                                    <td><?= esc($report['category_name']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['location']) ?></td>
+                                                    <td class="text-center pe-3">
+                                                        <a href="<?= base_url('admin/reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-dark rounded px-2">
+                                                            <i class="fas fa-eye"></i> Details
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="7" class="text-center text-secondary">No reports available.</td>
+                                            </tr>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -153,12 +173,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if (!empty($lost_reports)): ?>
+                                            <?php foreach ($lost_reports as $report): ?>
+                                                <tr class="text-nowrap">
+                                                    <td class="ps-3"><?= esc($report['id']) ?></td>
+                                                    <td><?= esc($report['item_name']) ?></td>
+                                                    <td><?= esc($report['category_name']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['location']) ?></td>
+                                                    <td class="text-center pe-3">
+                                                        <a href="<?= base_url('admin/reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-dark rounded px-2">
+                                                            <i class="fas fa-eye"></i> Details
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="6" class="text-center text-secondary">No reports available.</td>
+                                            </tr>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer border-top text-center py-2">
-                            <a href="#" class="btn btn-secondary">
+                            <a href="<?= base_url('admin/reports/lost-items') ?>" class="btn btn-secondary">
                                 <i class="fas fa-list-ul me-1"></i>View Lost Reports
                             </a>
                         </div>
@@ -178,12 +218,32 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php if (!empty($found_reports)): ?>
+                                            <?php foreach ($found_reports as $report): ?>
+                                                <tr class="text-nowrap">
+                                                    <td class="ps-3"><?= esc($report['id']) ?></td>
+                                                    <td><?= esc($report['item_name']) ?></td>
+                                                    <td><?= esc($report['category_name']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['location']) ?></td>
+                                                    <td class="text-center pe-3">
+                                                        <a href="<?= base_url('admin/reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-dark rounded px-2">
+                                                            <i class="fas fa-eye"></i> Details
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="6" class="text-center text-secondary">No reports available.</td>
+                                            </tr>
+                                        <?php endif; ?>
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         <div class="card-footer border-top text-center py-2">
-                            <a href="#" class="btn btn-secondary">
+                            <a href="<?= base_url('admin/reports/lost-items') ?>" class="btn btn-secondary">
                                 <i class="fas fa-list-ul me-1"></i>View Found Reports
                             </a>
                         </div>

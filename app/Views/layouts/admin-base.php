@@ -19,15 +19,17 @@
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed">
-    <?= $this->include('partials/admin-navbar') ?>
+    <div class="wrapper">
+        <?= $this->include('partials/admin-navbar') ?>
 
-    <?= $this->include('partials/admin-sidebar') ?>
+        <?= $this->include('partials/admin-sidebar') ?>
 
-    <main class="content-wrapper">
-        <?= $this->renderSection('content') ?>
-    </main>
+        <main class="content-wrapper">
+            <?= $this->renderSection('content') ?>
+        </main>
 
-    <?= $this->include('partials/admin-footer') ?>
+        <?= $this->include('partials/admin-footer') ?>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.2.0/js/adminlte.min.js"></script>

@@ -69,20 +69,39 @@
 <section class="bg-body-tertiary py-5" id="recent">
     <div class="container">
         <div class="text-center mb-4">
-            <h2 class="h2 mb-0 fw-bold">Recently Reported Items</h2>
+            <h2 class="h2 fw-bold">Recently Reported Items</h2>
         </div>
 
-        <div class="row g-4">
-            <div class="alert alert-info" role="alert">
-                No items have been reported yet.
+        <?php if (!empty($reports)): ?>
+            <div class="row g-4">
+                <?php foreach ($reports as $index => $report): ?>
+                    <div class="col-md-6 col-lg-3">
+                        <div class="card h-100 shadow-sm">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= esc($report['item_name']) ?></h5>
+                                <p class="card-text mb-1"><strong>Type:</strong> <?= esc($report['report_type']) ?></p>
+                                <p class="card-text mb-1"><strong>Category:</strong> <?= esc($report['category_name']) ?></p>
+                                <p class="card-text mb-1 text-primary"><strong>Date:</strong> <?= esc($report['date_of_event']) ?></p>
+                                <p class="card-text text-primary"><strong>Location:</strong> <?= esc($report['location']) ?></p>
+                            </div>
+                            <div class="card-footer text-center bg-white border-top-0">
+                                <a href="<?= base_url('reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-eye"></i> Details
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
             </div>
-
-        </div>
+        <?php else: ?>
+            <div class="text-center text-primary mt-4">No reports available.</div>
+        <?php endif; ?>
 
         <div class="text-center mt-5">
             <a href="#" class="btn btn-primary btn-lg px-4">View All Items</a>
         </div>
     </div>
+
 </section>
 
 <section class="bg-light py-5" id="how-it-works">

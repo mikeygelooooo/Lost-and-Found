@@ -16,3 +16,8 @@ $routes->group('about', function ($routes) {
     $routes->get('privacy-policy', 'Pages::privacy_policy');
     $routes->get('terms-of-service', 'Pages::terms_of_service');
 });
+
+$routes->group('admin', function ($routes) {
+    $routes->get('', 'Admin::dashboard');
+    $routes->get('dashboard', 'Admin::dashboard');
+});

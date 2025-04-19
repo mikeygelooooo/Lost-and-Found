@@ -77,9 +77,20 @@
                 <?php foreach ($reports as $index => $report): ?>
                     <div class="col-md-6 col-lg-3">
                         <div class="card h-100 shadow-sm">
+                            <?php if ($report['report_type'] == "Lost"): ?>
+                                <div class="card-header bg-danger text-white">
+                                    Lost Item
+                                </div>
+                            <?php else: ?>
+                                <div class="card-header bg-success text-white">
+                                    Found Item
+                                </div>
+                            <?php endif; ?>
+                            <?php if ($report['image'] != ''): ?>
+                                <img src="/api/placeholder/400/300" class="card-img-top p-2" alt="Gold Bracelet">
+                            <?php endif; ?>
                             <div class="card-body">
                                 <h5 class="card-title"><?= esc($report['item_name']) ?></h5>
-                                <p class="card-text mb-1"><strong>Type:</strong> <?= esc($report['report_type']) ?></p>
                                 <p class="card-text mb-1"><strong>Category:</strong> <?= esc($report['category_name']) ?></p>
                                 <p class="card-text mb-1 text-primary"><strong>Date:</strong> <?= esc($report['date_of_event']) ?></p>
                                 <p class="card-text text-primary"><strong>Location:</strong> <?= esc($report['location']) ?></p>
@@ -98,7 +109,7 @@
         <?php endif; ?>
 
         <div class="text-center mt-5">
-            <a href="#" class="btn btn-primary btn-lg px-4">View All Items</a>
+            <a href="<?= base_url('reports') ?>" class="btn btn-primary btn-lg px-4">View All Items</a>
         </div>
     </div>
 

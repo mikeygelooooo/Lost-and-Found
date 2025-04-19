@@ -11,13 +11,13 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
                 <li class="nav-item me-3">
-                    <a class="nav-link" href="<?= base_url('home') ?>">
+                    <a class="nav-link <?= uri_string() == 'home' ? 'active' : '' ?>" href="<?= base_url('home') ?>">
                         <i class="fas fa-home me-1"></i>
                         Home
                     </a>
                 </li>
                 <li class="nav-item me-3">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link <?= uri_string() == 'reports' ? 'active' : '' ?>" href="<?= base_url('reports') ?>">
                         <i class="fas fa-search me-1"></i>
                         Browse
                     </a>

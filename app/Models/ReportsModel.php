@@ -21,15 +21,17 @@ class ReportsModel extends Model
         'updated_at'
     ];
 
+    // Landing Page Queries
     public function landingAllReports()
     {
         return $this->join('categories', 'categories.id = reports.category_id')
             ->select('reports.*, categories.name as category_name')
             ->orderBy('reports.created_at', 'DESC') // Order by latest first
-            ->limit(8) // Limit to 10 results
+            ->limit(8) // Limit to 8 results
             ->findAll();
     }
 
+    // Admin Dashboard Queries
     public function dashboardAllReports()
     {
         return $this->join('categories', 'categories.id = reports.category_id')
@@ -49,7 +51,6 @@ class ReportsModel extends Model
             ->findAll();
     }
 
-    // Retrieve all found items
     public function dashboardFoundItems()
     {
         return $this->where('report_type', 'Found')
@@ -60,7 +61,16 @@ class ReportsModel extends Model
             ->findAll();
     }
 
-    // Retrieve all lost items
+    // All Reports
+    public function getAllReports()
+    {
+        return $this->join('categories', 'categories.id = reports.category_id')
+            ->select('reports.*, categories.name as category_name')
+            ->orderBy('reports.created_at', 'DESC') // Order by latest first
+            ->findAll();
+    }
+
+    // Report Type Queries
     public function getLostItems()
     {
         return $this->where('report_type', 'Lost')
@@ -69,7 +79,6 @@ class ReportsModel extends Model
             ->findAll();
     }
 
-    // Retrieve all found items
     public function getFoundItems()
     {
         return $this->where('report_type', 'Found')
@@ -78,7 +87,7 @@ class ReportsModel extends Model
             ->findAll();
     }
 
-    // Retrieve a single report by ID
+    // Report Details
     public function getReportById($id)
     {
         return $this->where('reports.id', $id)

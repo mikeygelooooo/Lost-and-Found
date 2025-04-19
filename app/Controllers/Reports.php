@@ -7,6 +7,14 @@ use App\Models\ReportsModel;
 
 class Reports extends BaseController
 {
+    public function reports()
+    {
+        $model = new ReportsModel();
+        $data['reports'] = $model->getAllReports();
+
+        return view('reports/reports', $data, ['title' => '| Reports']);
+    }
+
     public function report_details($id)
     {
         $model = new ReportsModel();

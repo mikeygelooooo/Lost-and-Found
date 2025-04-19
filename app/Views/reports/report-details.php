@@ -4,7 +4,7 @@
 <div class="container p-4">
     <ol class="breadcrumb p-2 border border-2 border-secondary rounded-0 mb-5">
         <li class="breadcrumb-item">
-            <a href="#" class="text-decoration-none">Reports</a>
+            <a href="<?= base_url('reports') ?>" class="text-decoration-none">Reports</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">Report #<?= $report['id'] ?? '50' ?></li>
     </ol>

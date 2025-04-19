@@ -19,6 +19,7 @@ $routes->group('about', function ($routes) {
 
 // Admin
 $routes->group('reports', function ($routes) {
+    $routes->get('', 'Reports::reports');
     $routes->get('details/(:num)', 'Reports::report_details/$1');
 });
 

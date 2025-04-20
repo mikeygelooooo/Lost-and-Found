@@ -23,6 +23,7 @@ $routes->group('reports', function ($routes) {
 
     $routes->get('new/lost', 'Reports::new_lost_report');
     $routes->get('new/found', 'Reports::new_found_report');
+    $routes->post('create', 'Reports::create_report');
 
     $routes->get('details/(:num)', 'Reports::report_details/$1');
     

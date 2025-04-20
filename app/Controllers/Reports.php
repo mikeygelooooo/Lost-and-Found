@@ -17,22 +17,39 @@ class Reports extends BaseController
         return view('reports/reports', $data, ['title' => '| Reports']);
     }
 
-    public function new_lost_report()
+    public function new_report($report_type)
     {
         $categoryModel = new CategoriesModel();
-        $data['categories'] = $categoryModel->findAll();
 
-        return view('reports/new-lost-report', $data, ['title' => '| Report Lost Item']);
+        $data = [
+            'categories'  => $categoryModel->findAll(),
+            'form_action' => base_url('reports/create'),
+            'report_type' => $report_type,
+            'title'       => '| Report ' . ucfirst($report_type) . ' Item'
+        ];
+
+        return view('reports/new-report', $data);
     }
 
-    public function new_found_report()
+    public function edit_report($id)
     {
         $categoryModel = new CategoriesModel();
-        $data['categories'] = $categoryModel->findAll();
+        $reportModel = new ReportsModel();
 
-        return view('reports/new-found-report', $data, ['title' => '| Report Found Item']);
+        $report = $reportModel->find($id);
+
+        $data = [
+            'report'         => $report,
+            'categories'   => $categoryModel->findAll(),
+            'form_action'  => base_url("reports/update/{$id}"),
+            'report_type'  => $report['report_type'],
+            'title'        => '| Edit Report'
+        ];
+
+        return view('reports/edit-report', $data);
     }
 
+    // CRUD Functionality
     public function report_details($id)
     {
         $model = new ReportsModel();
@@ -47,9 +64,7 @@ class Reports extends BaseController
 
     public function create_report()
     {
-        $categoryModel = new CategoriesModel();
         $reportModel = new ReportsModel();
-        $data['categories'] = $categoryModel->findAll();
 
         $reportData = [
             'report_type'   => $this->request->getPost('report-type'),
@@ -64,6 +79,32 @@ class Reports extends BaseController
 
         return redirect()->to('reports')->with('message', 'Report added successfully!');
     }
+
+    public function update_report($id)
+    {
+        // Load the necessary models
+        $reportModel = new ReportsModel();
+
+        // Get input data
+        $data = [
+            'item_name'     => $this->request->getPost('item-name'),
+            'category_id'   => $this->request->getPost('category-id'),
+            'report_type'   => $this->request->getPost('report-type'),
+            'date_of_event' => $this->request->getPost('date-of-event'),
+            'location'      => $this->request->getPost('location'),
+            'description'   => $this->request->getPost('description'),
+        ];
+
+        // Update the report in the database
+        if ($reportModel->update($id, $data)) {
+            // Redirect to the report details page or show a success message
+            return redirect()->to(base_url('reports/details/' . $id))->with('message', 'Report updated successfully!');
+        } else {
+            // Handle any failure in the update process
+            return redirect()->to(base_url('reports/details/' . $id))->with('error', 'Failed to update the report.');
+        }
+    }
+
 
     public function delete_report($id)
     {

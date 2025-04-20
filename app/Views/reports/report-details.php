@@ -9,6 +9,20 @@
         <li class="breadcrumb-item active" aria-current="page">Report #<?= $report['id'] ?? '50' ?></li>
     </ol>
 
+    <?php if (session()->getFlashdata('message')): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('message') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('error') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
     <div class="card">
         <!-- Card Header -->
         <div class="card-header p-3">
@@ -91,7 +105,9 @@
         <!-- Card Footer -->
         <div class="card-footer p-3">
             <div class="d-flex justify-content-end">
-                <button class="btn btn-primary me-2">Edit Report</button>
+                <a href="<?= base_url('reports/edit/' . $report['id']) ?>" class="btn btn-primary">
+                    Edit Report
+                </a>
                 <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');">
                     <?= csrf_field() ?>
                     <button type="submit" class="btn btn-danger">Delete Report</button>

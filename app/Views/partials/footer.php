@@ -17,8 +17,8 @@
             <div class="col-md-4">
                 <h6 class="fw-bold mb-3">Quick Links</h6>
                 <ul class="list-unstyled mb-0">
-                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
                     <li class="mb-2"><a href="<?= base_url('about') ?>" class="text-light text-decoration-none">About</a></li>
+                    <li class="mb-2"><a href="#" class="text-light text-decoration-none">Contact Us</a></li>
                     <li class="mb-2">
                         <a href="<?= base_url('about/privacy-policy') ?>" class="text-light text-decoration-none">Privacy Policy</a>
                     </li>

@@ -2,6 +2,13 @@
 
 <?= $this->section('content') ?>
 <div class="container my-5">
+    <ol class="breadcrumb p-2 border border-2 border-secondary rounded-0 mb-5">
+        <li class="breadcrumb-item">
+            <a href="<?= base_url('about') ?>" class="text-decoration-none">About</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Termf of Service</li>
+    </ol>
+
     <div class="bg-white rounded shadow-sm p-0">
         <div class="bg-primary text-white p-4 mb-4 rounded-top">
             <h1 class="text-center">Terms of Service</h1>

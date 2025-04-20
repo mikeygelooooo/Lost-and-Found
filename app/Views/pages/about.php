@@ -8,28 +8,9 @@
     </div>
 </section>
 
-<!-- Our Story -->
-<section class="py-5 bg-light" id="our-story">
-    <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-6 mb-4 mb-lg-0">
-                <img src="<?= base_url('assets/images/about_hero.jpg') ?>" alt="Our Story" class="img-fluid rounded shadow">
-            </div>
-            <div class="col-lg-6">
-                <h2 class="fw-bold mb-4 text-center">Our Story</h2>
-                <p class="mb-4">
-                    FindMyStuff was founded in 2024 with a simple mission: to help people recover their lost items and return found ones to their rightful owners. What started as a small community initiative has grown into a trusted platform connecting thousands of people nationwide.
-                </p>
-                <p>
-                    We understand how stressful and disruptive losing important possessions can be. That's why we've created a secure, user-friendly platform where people can report lost items and good Samaritans can help reunite them with their owners.
-                </p>
-            </div>
-        </div>
-    </div>
-</section>
 
 <!-- Our Mission -->
-<section class="py-5 bg-body-tertiary" id="our-mission">
+<section class="py-5 bg-light" id="our-mission">
     <div class="container">
         <h2 class="text-center fw-bold mb-5">Our Mission</h2>
         <div class="row g-4">
@@ -70,42 +51,64 @@
     </div>
 </section>
 
-<!-- Testimonials -->
-<section class="py-5 bg-light" id="testimonials">
+<!-- Our Story -->
+<section class="py-5 bg-body-tertiary" id="our-story">
     <div class="container">
-        <h2 class="text-center fw-bold mb-5">Success Stories</h2>
-        <div class="row g-4">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <img src="<?= base_url('assets/images/about_hero.jpg') ?>" alt="Our Story" class="img-fluid rounded shadow">
+            </div>
             <div class="col-lg-6">
+                <h2 class="fw-bold mb-4 text-center">Our Story</h2>
+                <p class="mb-4">
+                    FindMyStuff was founded in 2024 with a simple mission: to help people recover their lost items and return found ones to their rightful owners. What started as a small community initiative has grown into a trusted platform connecting thousands of people nationwide.
+                </p>
+                <p>
+                    We understand how stressful and disruptive losing important possessions can be. That's why we've created a secure, user-friendly platform where people can report lost items and good Samaritans can help reunite them with their owners.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Useful Links -->
+<section class="py-5 bg-light" id="about-links">
+    <div class="container">
+        <h2 class="text-center fw-bold mb-5">Useful Links</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
                 <div class="card h-100 border-0 shadow">
-                    <div class="card-body p-4">
-                        <div class="d-flex mb-3">
-                            <i class="fas fa-quote-left text-primary fa-2x me-3 mt-1"></i>
-                            <p class="mb-0">I lost my wallet during a hiking trip and thought it was gone forever. Within 3 days of posting on FindMyStuff, someone had found it and reached out. All my cards and IDs were intact!</p>
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-secondary bg-opacity-25 p-3 d-inline-block mb-3">
+                            <i class="fas fa-envelope text-secondary fa-2x"></i>
                         </div>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="<?= base_url('assets/images/david_williams.png') ?>" alt="User" class="img-fluid rounded-circle me-3" width="50" height="50">
-                            <div>
-                                <h4 class="h6 fw-bold mb-0">David Williams</h4>
-                                <p class="text-muted small mb-0">Portland, OR</p>
-                            </div>
-                        </div>
+                        <h3 class="h4 fw-bold">Contact Us</h3>
+                        <p class="mb-3">Have questions or need help? We're here to assist you.</p>
+                        <a href="#" class="btn btn-secondary">Get in Touch</a>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6">
+            <div class="col-md-4">
                 <div class="card h-100 border-0 shadow">
-                    <div class="card-body p-4">
-                        <div class="d-flex mb-3">
-                            <i class="fas fa-quote-left text-primary fa-2x me-3 mt-1"></i>
-                            <p class="mb-0">I found a laptop at a coffee shop and had no idea how to find the owner. Posted it on FindMyStuff and was able to safely return it the next day. The secure messaging system made all the difference!</p>
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-warning bg-opacity-25 p-3 d-inline-block mb-3">
+                            <i class="fas fa-user-secret text-warning fa-2x"></i>
                         </div>
-                        <div class="d-flex align-items-center mt-3">
-                            <img src="<?= base_url('assets/images/jessica_martinez.png') ?>" alt="User" class="img-fluid rounded-circle me-3" width="50" height="50">
-                            <div>
-                                <h4 class="h6 fw-bold mb-0">Jessica Martinez</h4>
-                                <p class="text-muted small mb-0">Chicago, IL</p>
-                            </div>
+                        <h3 class="h4 fw-bold">Privacy Policy</h3>
+                        <p class="mb-3">Understand how we collect, use, and protect your personal data.</p>
+                        <a href="<?= base_url('about/privacy-policy') ?>" class="btn btn-warning">Read Policy</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow">
+                    <div class="card-body text-center p-4">
+                        <div class="rounded-circle bg-danger bg-opacity-25 p-3 d-inline-block mb-3">
+                            <i class="fas fa-file-contract text-danger fa-2x"></i>
                         </div>
+                        <h3 class="h4 fw-bold">Terms of Service</h3>
+                        <p class="mb-3">Learn about the rules and conditions for using our platform.</p>
+                        <a href="<?= base_url('about/terms-of-service') ?>" class="btn btn-danger">View Terms</a>
                     </div>
                 </div>
             </div>

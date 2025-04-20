@@ -45,7 +45,7 @@
                         </div>
                         <h3 class="h4 mb-3">I Lost Something</h3>
                         <p class="mb-4">File a report about your lost item and get notified when similar items are found.</p>
-                        <a href="<?= base_url('reports/new/lost') ?>" class="btn btn-danger btn-lg rounded-pill px-4">Report Lost Item</a>
+                        <a href="<?= base_url('reports/create/lost') ?>" class="btn btn-danger btn-lg rounded-pill px-4">Report Lost Item</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         </div>
                         <h3 class="h4 mb-3">I Found Something</h3>
                         <p class="mb-4">Help reunite lost items with their owners by reporting what you've found.</p>
-                        <a href="<?= base_url('reports/new/found') ?>" class="btn btn-success btn-lg rounded-pill px-4">Report Found Item</a>
+                        <a href="<?= base_url('reports/create/found') ?>" class="btn btn-success btn-lg rounded-pill px-4">Report Found Item</a>
                     </div>
                 </div>
             </div>

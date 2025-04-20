@@ -78,7 +78,7 @@
     <div class="container">
         <div class="row g-4">
             <div class="col-md-6">
-                <a href="<?= base_url('reports/new/lost') ?>" class="card h-100 shadow-sm border-danger border-opacity-25 text-decoration-none">
+                <a href="<?= base_url('reports/create/lost') ?>" class="card h-100 shadow-sm border-danger border-opacity-25 text-decoration-none">
                     <div class="card-body text-center py-4">
                         <div class="text-danger mb-3">
                             <i class="fas fa-search-minus fa-3x"></i>
@@ -89,7 +89,7 @@
                 </a>
             </div>
             <div class="col-md-6">
-                <a href="<?= base_url('reports/new/found') ?>" class="card h-100 shadow-sm border-success border-opacity-25 text-decoration-none">
+                <a href="<?= base_url('reports/create/found') ?>" class="card h-100 shadow-sm border-success border-opacity-25 text-decoration-none">
                     <div class="card-body text-center py-4">
                         <div class="text-success mb-3">
                             <i class="fas fa-hand-holding fa-3x"></i>

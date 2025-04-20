@@ -105,10 +105,10 @@
         <!-- Card Footer -->
         <div class="card-footer p-3">
             <div class="d-flex justify-content-end">
-                <a href="<?= base_url('reports/edit/' . $report['id']) ?>" class="btn btn-primary">
+                <a href="<?= base_url('reports/update/' . $report['id']) ?>" class="btn btn-primary">
                     Edit Report
                 </a>
-                <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');">
+                <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');" class="ms-2">
                     <?= csrf_field() ?>
                     <button type="submit" class="btn btn-danger">Delete Report</button>
                 </form>

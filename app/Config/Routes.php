@@ -24,11 +24,11 @@ $routes->group('reports', function ($routes) {
     $routes->get('details/(:num)', 'Reports::report_details/$1');
 
     // Create Report
-    $routes->get('new/(:segment)', 'Reports::new_report/$1');
     $routes->post('create', 'Reports::create_report');
+    $routes->get('create/(:segment)', 'Reports::new_report/$1');
 
     // Update Report
-    $routes->get('edit/(:num)', 'Reports::edit_report/$1');
+    $routes->get('update/(:num)', 'Reports::edit_report/$1');
     $routes->post('update/(:num)', 'Reports::update_report/$1');
 
     // Delete Report

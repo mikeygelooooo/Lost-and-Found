@@ -1,25 +1,42 @@
 <?= $this->extend('layouts/base') ?>
 
 <?= $this->section('content') ?>
-<section class="bg-body-tertiary py-5">
+<section class="py-5 bg-body-tertiary">
     <div class="container">
-        <div class="text-center mb-5">
-            <h1 class="display-4 fw-bold mb-3">Browse Item Reports</h1>
-            <p class="lead">Browse all lost and found items reported in our system</p>
+        <?php if (session()->getFlashdata('message')): ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('message') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <?php if (session()->getFlashdata('error')): ?>
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <?= session()->getFlashdata('error') ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
+        <div class="text-center mb-4">
+            <h1 class="display-4 fw-bold">Browse Item Reports</h1>
+            <p class="lead text-secondary">Browse all lost and found items reported in our system</p>
         </div>
 
-        <div class="row mb-4">
-            <div class="col-12 bg-white p-4 rounded shadow">
+        <!-- Filter Card -->
+        <div class="card shadow-sm">
+            <div class="card-body p-3 p-md-4">
                 <form class="row g-3">
                     <div class="col-md-3">
-                        <select class="form-select" id="typeFilter">
-                            <option selected value="">All Types</option>
+                        <label for="typeFilter" class="form-label small text-muted">Report Type</label>
+                        <select class="form-select shadow-sm" id="typeFilter">
+                            <option selected value="">All Reports</option>
                             <option value="lost">Lost</option>
                             <option value="found">Found</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="categoryFilter">
+                        <label for="categoryFilter" class="form-label small text-muted">Category</label>
+                        <select class="form-select shadow-sm" id="categoryFilter">
                             <option selected value="">All Categories</option>
                             <option>Accessories & Jewelry</option>
                             <option>Personal Belongings</option>
@@ -29,78 +46,144 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select class="form-select" id="locationFilter">
-                            <option selected value="">All Locations</option>
-                            <option>Cafeteria</option>
-                            <option>Lecture Hall</option>
-                            <option>Bus Stop</option>
-                            <option>Gym</option>
-                            <option>Parking Lot</option>
+                        <label for="locationFilter" class="form-label small text-muted">Sort by</label>
+                        <select class="form-select shadow-sm" id="locationFilter">
+                            <option selected value="">Newest First</option>
+                            <option>Oldest First</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search items...">
-                            <button class="btn btn-outline-secondary" type="button">
+                        <label for="searchInput" class="form-label small text-muted">Search</label>
+                        <div class="input-group shadow-sm">
+                            <input type="text" class="form-control" id="searchInput" placeholder="Search items...">
+                            <button class="btn btn-primary" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
+                    </div>
+                    <div class="col-12 text-end mt-3">
+                        <button type="reset" class="btn btn-outline-secondary btn-sm me-2">
+                            <i class="fas fa-redo-alt me-1"></i>Reset
+                        </button>
+                        <button type="submit" class="btn btn-primary btn-sm">
+                            <i class="fas fa-filter me-1"></i>Apply Settings
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
 </section>
-
-<section class="bg-light py-5">
+<section class="py-5 bg-light">
     <div class="container">
-        <?php if (!empty($reports)): ?>
-            <div class="row g-4">
+        <div class="row g-4">
+            <div class="col-md-6">
+                <a href="<?= base_url('reports/new/lost') ?>" class="card h-100 shadow-sm border-danger border-opacity-25 text-decoration-none">
+                    <div class="card-body text-center py-4">
+                        <div class="text-danger mb-3">
+                            <i class="fas fa-search-minus fa-3x"></i>
+                        </div>
+                        <h4 class="card-title mb-0 fw-bold text-danger">Report Lost Item</h4>
+                        <p class="card-text text-muted mt-2">Submit a report for your missing item</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-6">
+                <a href="<?= base_url('reports/new/found') ?>" class="card h-100 shadow-sm border-success border-opacity-25 text-decoration-none">
+                    <div class="card-body text-center py-4">
+                        <div class="text-success mb-3">
+                            <i class="fas fa-hand-holding fa-3x"></i>
+                        </div>
+                        <h4 class="card-title mb-0 fw-bold text-success">Report Found Item</h4>
+                        <p class="card-text text-muted mt-2">Submit a report for an item you found</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="py-5 bg-body-tertiary">
+    <div class="container">
+        <!-- Item Cards -->
+        <div class="row g-4">
+            <?php if (!empty($reports)): ?>
                 <?php foreach ($reports as $index => $report): ?>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card h-100 shadow-sm">
-                            <?php if ($report['report_type'] == "Lost"): ?>
-                                <div class="card-header bg-danger text-white">
-                                    Lost Item
-                                </div>
-                            <?php else: ?>
-                                <div class="card-header bg-success text-white">
-                                    Found Item
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($report['image'] != ''): ?>
-                                <img src="/api/placeholder/400/300" class="card-img-top p-2" alt="Gold Bracelet">
-                            <?php endif; ?>
-                            <div class="card-body">
-                                <h5 class="card-title"><?= esc($report['item_name']) ?></h5>
-                                <p class="card-text mb-1"><strong>Category:</strong> <?= esc($report['category_name']) ?></p>
-                                <p class="card-text mb-1 text-primary"><strong>Date:</strong> <?= esc($report['date_of_event']) ?></p>
-                                <p class="card-text text-primary"><strong>Location:</strong> <?= esc($report['location']) ?></p>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="card h-100 shadow-sm hover-shadow" style="transition: all 0.2s ease-in-out;">
+                            <div class="position-relative">
+                                <?php if ($report['image'] != ''): ?>
+                                    <img src="/api/placeholder/400/300" class="card-img-top p-2" alt="<?= esc($report['item_name']) ?>">
+                                <?php else: ?>
+                                    <div class="bg-light text-center p-4">
+                                        <i class="fas fa-image text-muted fa-3x"></i>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($report['report_type'] == "Lost"): ?>
+                                    <span class="position-absolute top-0 end-0 badge bg-danger m-2 px-3 py-2 rounded-pill">
+                                        <i class="fas fa-search-minus me-1"></i> Lost
+                                    </span>
+                                <?php else: ?>
+                                    <span class="position-absolute top-0 end-0 badge bg-success m-2 px-3 py-2 rounded-pill">
+                                        <i class="fas fa-hand-holding me-1"></i> Found
+                                    </span>
+                                <?php endif; ?>
                             </div>
-                            <div class="card-footer text-center bg-white border-top-0">
-                                <a href="<?= base_url('reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-eye"></i> Details
+
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold"><?= esc($report['item_name']) ?></h5>
+                                <p class="card-text mb-1">
+                                    <span class="badge bg-light text-dark">
+                                        <i class="fas fa-tag me-1"></i> <?= esc($report['category_name']) ?>
+                                    </span>
+                                </p>
+                                <p class="card-text mb-1 small text-muted">
+                                    <i class="far fa-calendar-alt me-1"></i> <?= esc($report['date_of_event']) ?>
+                                </p>
+                                <p class="card-text small text-muted">
+                                    <i class="fas fa-map-marker-alt me-1"></i> <?= esc($report['location']) ?>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white border-top-0 text-center">
+                                <a href="<?= base_url('reports/details/' . $report['id']) ?>" class="btn btn-outline-primary">
+                                    <i class="fas fa-eye me-1"></i> View Details
                                 </a>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <div class="text-center text-primary mt-4">No reports available.</div>
-        <?php endif; ?>
-
-        <div class="mt-5">
-            <div class="d-flex justify-content-center">
-                <div class="btn-group">
-                    <button class="btn btn-primary">Previous</button>
-                    <button class="btn btn-outline-primary active">1</button>
-                    <button class="btn btn-outline-primary">2</button>
-                    <button class="btn btn-outline-primary">3</button>
-                    <button class="btn btn-primary">Next</button>
+            <?php else: ?>
+                <div class="col-12">
+                    <div class="alert alert-info text-center p-5">
+                        <i class="fas fa-info-circle fa-2x mb-3"></i>
+                        <h5>No Reports Available</h5>
+                        <p class="mb-0">There are currently no items reported in the system.</p>
+                    </div>
                 </div>
-            </div>
+            <?php endif; ?>
         </div>
+
+        <!-- Pagination -->
+        <?php if (!empty($reports)): ?>
+            <nav aria-label="Item report pagination" class="mt-5">
+                <ul class="pagination justify-content-center">
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                    </li>
+                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                        <a class="page-link" href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        <?php endif; ?>
     </div>
 </section>
 <?= $this->endSection() ?>

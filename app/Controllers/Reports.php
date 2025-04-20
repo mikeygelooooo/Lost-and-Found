@@ -15,6 +15,16 @@ class Reports extends BaseController
         return view('reports/reports', $data, ['title' => '| Reports']);
     }
 
+    public function new_lost_report()
+    {
+        return view('reports/new-lost-report', ['title' => '| Report Lost Item']);
+    }
+
+    public function new_found_report()
+    {
+        return view('reports/new-found-report', ['title' => '| Report Found Item']);
+    }
+
     public function report_details($id)
     {
         $model = new ReportsModel();
@@ -25,5 +35,16 @@ class Reports extends BaseController
         }
 
         return view('reports/report-details', $data, ['title' => '| Report Details']);
+    }
+
+    public function delete_report($id)
+    {
+        $model = new ReportsModel();
+
+        if ($model->delete($id)) {
+            return redirect()->to('reports')->with('message', 'Report deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to delete report.');
+        }
     }
 }

@@ -45,7 +45,7 @@
                         </div>
                         <h3 class="h4 mb-3">I Lost Something</h3>
                         <p class="mb-4">File a report about your lost item and get notified when similar items are found.</p>
-                        <a href="#" class="btn btn-danger btn-lg rounded-pill px-4">Report Lost Item</a>
+                        <a href="<?= base_url('reports/new/lost') ?>" class="btn btn-danger btn-lg rounded-pill px-4">Report Lost Item</a>
                     </div>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                         </div>
                         <h3 class="h4 mb-3">I Found Something</h3>
                         <p class="mb-4">Help reunite lost items with their owners by reporting what you've found.</p>
-                        <a href="#" class="btn btn-success btn-lg rounded-pill px-4">Report Found Item</a>
+                        <a href="<?= base_url('reports/new/found') ?>" class="btn btn-success btn-lg rounded-pill px-4">Report Found Item</a>
                     </div>
                 </div>
             </div>
@@ -72,41 +72,63 @@
             <h2 class="h2 fw-bold">Recently Reported Items</h2>
         </div>
 
-        <?php if (!empty($reports)): ?>
-            <div class="row g-4">
+        <div class="row g-4">
+            <?php if (!empty($reports)): ?>
                 <?php foreach ($reports as $index => $report): ?>
-                    <div class="col-md-6 col-lg-3">
-                        <div class="card h-100 shadow-sm">
-                            <?php if ($report['report_type'] == "Lost"): ?>
-                                <div class="card-header bg-danger text-white">
-                                    Lost Item
-                                </div>
-                            <?php else: ?>
-                                <div class="card-header bg-success text-white">
-                                    Found Item
-                                </div>
-                            <?php endif; ?>
-                            <?php if ($report['image'] != ''): ?>
-                                <img src="/api/placeholder/400/300" class="card-img-top p-2" alt="Gold Bracelet">
-                            <?php endif; ?>
-                            <div class="card-body">
-                                <h5 class="card-title"><?= esc($report['item_name']) ?></h5>
-                                <p class="card-text mb-1"><strong>Category:</strong> <?= esc($report['category_name']) ?></p>
-                                <p class="card-text mb-1 text-primary"><strong>Date:</strong> <?= esc($report['date_of_event']) ?></p>
-                                <p class="card-text text-primary"><strong>Location:</strong> <?= esc($report['location']) ?></p>
+                    <div class="col-md-6 col-lg-4 col-xl-3">
+                        <div class="card h-100 shadow-sm hover-shadow" style="transition: all 0.2s ease-in-out;">
+                            <div class="position-relative">
+                                <?php if ($report['image'] != ''): ?>
+                                    <img src="/api/placeholder/400/300" class="card-img-top p-2" alt="<?= esc($report['item_name']) ?>">
+                                <?php else: ?>
+                                    <div class="bg-light text-center p-4">
+                                        <i class="fas fa-image text-muted fa-3x"></i>
+                                    </div>
+                                <?php endif; ?>
+
+                                <?php if ($report['report_type'] == "Lost"): ?>
+                                    <span class="position-absolute top-0 end-0 badge bg-danger m-2 px-3 py-2 rounded-pill">
+                                        <i class="fas fa-search-minus me-1"></i> Lost
+                                    </span>
+                                <?php else: ?>
+                                    <span class="position-absolute top-0 end-0 badge bg-success m-2 px-3 py-2 rounded-pill">
+                                        <i class="fas fa-hand-holding me-1"></i> Found
+                                    </span>
+                                <?php endif; ?>
                             </div>
-                            <div class="card-footer text-center bg-white border-top-0">
-                                <a href="<?= base_url('reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-primary">
-                                    <i class="fas fa-eye"></i> Details
+
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold"><?= esc($report['item_name']) ?></h5>
+                                <p class="card-text mb-1">
+                                    <span class="badge bg-light text-dark">
+                                        <i class="fas fa-tag me-1"></i> <?= esc($report['category_name']) ?>
+                                    </span>
+                                </p>
+                                <p class="card-text mb-1 small text-muted">
+                                    <i class="far fa-calendar-alt me-1"></i> <?= esc($report['date_of_event']) ?>
+                                </p>
+                                <p class="card-text small text-muted">
+                                    <i class="fas fa-map-marker-alt me-1"></i> <?= esc($report['location']) ?>
+                                </p>
+                            </div>
+                            <div class="card-footer bg-white border-top-0 text-center">
+                                <a href="<?= base_url('reports/details/' . $report['id']) ?>" class="btn btn-outline-primary">
+                                    <i class="fas fa-eye me-1"></i> View Details
                                 </a>
                             </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
-            </div>
-        <?php else: ?>
-            <div class="text-center text-primary mt-4">No reports available.</div>
-        <?php endif; ?>
+            <?php else: ?>
+                <div class="col-12">
+                    <div class="alert alert-info text-center p-5">
+                        <i class="fas fa-info-circle fa-2x mb-3"></i>
+                        <h5>No Reports Available</h5>
+                        <p class="mb-0">There are currently no items reported in the system.</p>
+                    </div>
+                </div>
+            <?php endif; ?>
+        </div>
 
         <div class="text-center mt-5">
             <a href="<?= base_url('reports') ?>" class="btn btn-primary btn-lg px-4">View All Items</a>

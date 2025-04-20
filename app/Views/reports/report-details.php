@@ -92,7 +92,10 @@
         <div class="card-footer p-3">
             <div class="d-flex justify-content-end">
                 <button class="btn btn-primary me-2">Edit Report</button>
-                <button class="btn btn-danger">Delete Report</button>
+                <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');">
+                    <?= csrf_field() ?>
+                    <button type="submit" class="btn btn-danger">Delete Report</button>
+                </form>
             </div>
         </div>
     </div>

@@ -20,7 +20,13 @@ $routes->group('about', function ($routes) {
 // Admin
 $routes->group('reports', function ($routes) {
     $routes->get('', 'Reports::reports');
+
+    $routes->get('new/lost', 'Reports::new_lost_report');
+    $routes->get('new/found', 'Reports::new_found_report');
+
     $routes->get('details/(:num)', 'Reports::report_details/$1');
+    
+    $routes->post('delete/(:num)', 'Reports::delete_report/$1');
 });
 
 // Admin

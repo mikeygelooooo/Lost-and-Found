@@ -28,12 +28,12 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end">
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="<?= base_url('reports/new/lost') ?>">
                                 <i class="fas fa-exclamation-circle text-danger me-2"></i>Report Lost Item
                             </a>
                         </li>
                         <li>
-                            <a class="dropdown-item" href="#">
+                            <a class="dropdown-item" href="<?= base_url('reports/new/found') ?>">
                                 <i class="fas fa-check-circle text-success me-2"></i>Report Found Item
                             </a>
                         </li>

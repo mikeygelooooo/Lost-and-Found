@@ -37,17 +37,17 @@
                     <div class="col-md-3">
                         <label for="categoryFilter" class="form-label small text-muted">Category</label>
                         <select class="form-select shadow-sm" id="categoryFilter">
-                            <option selected value="">All Categories</option>
-                            <option>Accessories & Jewelry</option>
-                            <option>Personal Belongings</option>
-                            <option>School & Office Supplies</option>
-                            <option>Transportation Items</option>
-                            <option>Electronics</option>
+                            <option selected disabled>All Categories</option>
+                            <?php foreach ($categories as $category): ?>
+                                <option value="<?= esc($category['id']); ?>">
+                                    <?= esc($category['name']); ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <label for="locationFilter" class="form-label small text-muted">Sort by</label>
-                        <select class="form-select shadow-sm" id="locationFilter">
+                        <label for="sortFilter" class="form-label small text-muted">Sort by</label>
+                        <select class="form-select shadow-sm" id="sortFilter">
                             <option selected value="">Newest First</option>
                             <option>Oldest First</option>
                         </select>
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="col-12 text-end mt-3">
-                        <button type="reset" class="btn btn-outline-secondary btn-sm me-2">
+                        <button type="reset" class="btn btn-outline-dark btn-sm me-2">
                             <i class="fas fa-redo-alt me-1"></i>Reset
                         </button>
                         <button type="submit" class="btn btn-primary btn-sm">
@@ -163,27 +163,6 @@
                 </div>
             <?php endif; ?>
         </div>
-
-        <!-- Pagination -->
-        <?php if (!empty($reports)): ?>
-            <nav aria-label="Item report pagination" class="mt-5">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
-        <?php endif; ?>
     </div>
 </section>
 <?= $this->endSection() ?>

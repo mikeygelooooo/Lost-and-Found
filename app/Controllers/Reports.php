@@ -12,7 +12,12 @@ class Reports extends BaseController
     public function reports()
     {
         $model = new ReportsModel();
-        $data['reports'] = $model->getAllReports();
+        $categoryModel = new CategoriesModel();
+
+        $data = [
+            'categories'  => $categoryModel->findAll(),
+            'reports'     => $model->getAllReports()
+        ];
 
         return view('reports/reports', $data, ['title' => '| Reports']);
     }

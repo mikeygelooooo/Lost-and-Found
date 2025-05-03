@@ -44,11 +44,11 @@
                     <div class="row mb-3">
                         <div class="col-6">
                             <small class="text-muted">Category</small>
-                            <p id="itemCategory" class="mb-0"><?= esc($report['category_name']) ?></p>
+                            <p id="itemCategory" class="mb-0"><?= esc($report['category']) ?></p>
                         </div>
                         <div class="col-6">
                             <small class="text-muted">Report Type</small>
-                            <p class="mb-0"><?= esc($report['report_type']) ?></p>
+                            <p class="mb-0"><?= ucfirst(esc($report['report_type'])) ?> Item</p>
                         </div>
                     </div>
                     <div class="mb-3">

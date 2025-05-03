@@ -86,7 +86,7 @@
                                     </div>
                                 <?php endif; ?>
 
-                                <?php if ($report['report_type'] == "Lost"): ?>
+                                <?php if ($report['report_type'] == "lost"): ?>
                                     <span class="position-absolute top-0 end-0 badge bg-danger m-2 px-3 py-2 rounded-pill">
                                         <i class="fas fa-search-minus me-1"></i> Lost
                                     </span>
@@ -101,7 +101,7 @@
                                 <h5 class="card-title fw-bold"><?= esc($report['item_name']) ?></h5>
                                 <p class="card-text mb-1">
                                     <span class="badge bg-light text-dark">
-                                        <i class="fas fa-tag me-1"></i> <?= esc($report['category_name']) ?>
+                                        <i class="fas fa-tag me-1"></i> <?= esc($report['category']) ?>
                                     </span>
                                 </p>
                                 <p class="card-text mb-1 small text-muted">

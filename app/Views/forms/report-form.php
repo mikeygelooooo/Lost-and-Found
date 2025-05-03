@@ -1,4 +1,6 @@
 <form method="post" action="<?= esc($form_action); ?>">
+    <?= csrf_field() ?>
+
     <input type="hidden" name="report-type" value="<?= esc($report_type); ?>">
 
     <div class="mb-3">
@@ -8,12 +10,12 @@
 
     <div class="mb-3">
         <label for="category" class="form-label">Category*</label>
-        <select class="form-select" name="category-id" required>
-            <option value="" disabled <?= !isset($report['category_id']) ? 'selected' : '' ?>>Select a category</option>
+        <select class="form-select" name="category" required>
+            <option value="" disabled <?= !isset($report['category']) ? 'selected' : '' ?>>Select a category</option>
             <?php foreach ($categories as $category): ?>
-                <option value="<?= esc($category['id']); ?>"
-                    <?= (isset($report['category_id']) && $report['category_id'] == $category['id']) ? 'selected' : '' ?>>
-                    <?= esc($category['name']); ?>
+                <option value="<?= esc($category); ?>"
+                    <?= (isset($report['category']) && $report['category'] == $category) ? 'selected' : '' ?>>
+                    <?= esc($category); ?>
                 </option>
             <?php endforeach; ?>
         </select>

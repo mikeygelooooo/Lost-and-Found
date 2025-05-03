@@ -12,10 +12,9 @@ class Reports extends BaseController
     public function reports()
     {
         $model = new ReportsModel();
-        $categoryModel = new CategoriesModel();
 
         $data = [
-            'categories'  => $categoryModel->findAll(),
+            'categories'  => $model->getCategoryEnumValues(),
             'reports'     => $model->getAllReports()
         ];
 
@@ -24,10 +23,10 @@ class Reports extends BaseController
 
     public function new_report($report_type)
     {
-        $categoryModel = new CategoriesModel();
+        $model = new ReportsModel();
 
         $data = [
-            'categories'  => $categoryModel->findAll(),
+            'categories'  => $model->getCategoryEnumValues(),
             'form_action' => base_url('reports/create'),
             'report_type' => $report_type,
             'title'       => '| Report ' . ucfirst($report_type) . ' Item'
@@ -38,14 +37,13 @@ class Reports extends BaseController
 
     public function edit_report($id)
     {
-        $categoryModel = new CategoriesModel();
-        $reportModel = new ReportsModel();
+        $model = new ReportsModel();
 
-        $report = $reportModel->find($id);
+        $report = $model->find($id);
 
         $data = [
             'report'         => $report,
-            'categories'   => $categoryModel->findAll(),
+            'categories'  => $model->getCategoryEnumValues(),
             'form_action'  => base_url("reports/update/{$id}"),
             'report_type'  => $report['report_type'],
             'title'        => '| Edit Report'
@@ -74,7 +72,7 @@ class Reports extends BaseController
         $reportData = [
             'report_type'   => $this->request->getPost('report-type'),
             'item_name'     => $this->request->getPost('item-name'),
-            'category_id'   => $this->request->getPost('category-id'),
+            'category'   => $this->request->getPost('category'),
             'date_of_event' => $this->request->getPost('date-of-event'),
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
@@ -93,7 +91,7 @@ class Reports extends BaseController
         // Get input data
         $data = [
             'item_name'     => $this->request->getPost('item-name'),
-            'category_id'   => $this->request->getPost('category-id'),
+            'category'   => $this->request->getPost('category'),
             'report_type'   => $this->request->getPost('report-type'),
             'date_of_event' => $this->request->getPost('date-of-event'),
             'location'      => $this->request->getPost('location'),

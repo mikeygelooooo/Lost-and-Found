@@ -4,12 +4,12 @@
     <input type="hidden" name="report-type" value="<?= esc($report_type); ?>">
 
     <div class="mb-3">
-        <label for="itemName" class="form-label">Item Name*</label>
+        <label for="itemName" class="form-label">Item Name<span class="text-danger">*</span></label>
         <input type="text" class="form-control" name="item-name" placeholder="Enter item name" value="<?= esc($report['item_name'] ?? '') ?>" required>
     </div>
 
     <div class="mb-3">
-        <label for="category" class="form-label">Category*</label>
+        <label for="category" class="form-label">Category<span class="text-danger">*</span></label>
         <select class="form-select" name="category" required>
             <option value="" disabled <?= !isset($report['category']) ? 'selected' : '' ?>>Select a category</option>
             <?php foreach ($categories as $category): ?>
@@ -23,12 +23,12 @@
 
     <div class="row">
         <div class="col-md-6 mb-3">
-            <label for="date-of-event" class="form-label">Date Lost*</label>
+            <label for="date-of-event" class="form-label">Date of Event<span class="text-danger">*</span></label>
             <input type="date" class="form-control" name="date-of-event" value="<?= esc($report['date_of_event'] ?? '') ?>" required>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="location" class="form-label">Location*</label>
-            <input type="text" class="form-control" name="location" placeholder="Where was it lost?" value="<?= esc($report['location'] ?? '') ?>" required>
+            <label for="location" class="form-label">Location<span class="text-danger">*</span></label>
+            <input type="text" class="form-control" name="location" placeholder="Where did the event take place?" value="<?= esc($report['location'] ?? '') ?>" required>
         </div>
     </div>
 

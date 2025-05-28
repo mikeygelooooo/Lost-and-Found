@@ -23,7 +23,7 @@
                     ]); ?>
                 </div>
                 <div class="card-footer text-muted">
-                    <small>* Required fields</small>
+                    <small><span class="text-danger">*</span> Required fields</small>
                 </div>
             </div>
         </div>

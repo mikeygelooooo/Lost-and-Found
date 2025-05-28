@@ -136,7 +136,7 @@
                                                     <td class="ps-3"><?= esc($report['id']) ?></td>
                                                     <td><?= esc($report['item_name']) ?></td>
                                                     <td><?= esc($report['report_type']) ?></td>
-                                                    <td><?= esc($report['category_name']) ?></td>
+                                                    <td><?= esc($report['category']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['location']) ?></td>
                                                     <td class="text-center pe-3">
@@ -178,7 +178,7 @@
                                                 <tr class="text-nowrap">
                                                     <td class="ps-3"><?= esc($report['id']) ?></td>
                                                     <td><?= esc($report['item_name']) ?></td>
-                                                    <td><?= esc($report['category_name']) ?></td>
+                                                    <td><?= esc($report['category']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['location']) ?></td>
                                                     <td class="text-center pe-3">
@@ -223,7 +223,7 @@
                                                 <tr class="text-nowrap">
                                                     <td class="ps-3"><?= esc($report['id']) ?></td>
                                                     <td><?= esc($report['item_name']) ?></td>
-                                                    <td><?= esc($report['category_name']) ?></td>
+                                                    <td><?= esc($report['category']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['location']) ?></td>
                                                     <td class="text-center pe-3">

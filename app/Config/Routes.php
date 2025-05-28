@@ -10,6 +10,15 @@ use CodeIgniter\Router\RouteCollection;
 $routes->get('/', 'Pages::landing');
 $routes->get('home', 'Pages::landing');
 
+// Auth
+$routes->group('', function($routes) {
+    $routes->get('signup', 'Auth::signup');
+    $routes->post('register', 'Auth::register');
+    $routes->get('login', 'Auth::login');
+    $routes->post('authenticate', 'Auth::authenticate');
+    $routes->get('logout', 'Auth::logout');
+});
+
 // About
 $routes->group('about', function ($routes) {
     $routes->get('', 'Pages::about');

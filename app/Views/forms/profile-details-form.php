@@ -29,7 +29,7 @@
     <div class="col-xl-6">
         <div class="row g-2">
             <div class="col-md-6">
-                <a href="<?= base_url('profile/edit') ?>" class="btn btn-primary p-2 w-100">
+                <a href="<?= base_url('profile/update') ?>" class="btn btn-primary p-2 w-100">
                     <i class="fas fa-edit me-1"></i> EDIT PROFILE
                 </a>
             </div>

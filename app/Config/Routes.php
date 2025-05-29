@@ -13,16 +13,16 @@ $routes->get('home', 'Pages::landing');
 // Auth
 $routes->group('', function($routes) {
     $routes->get('signup', 'Auth::signup');
-    $routes->post('register', 'Auth::register');
+    $routes->post('signup', 'Auth::register');
     $routes->get('login', 'Auth::login');
-    $routes->post('authenticate', 'Auth::authenticate');
+    $routes->post('login', 'Auth::authenticate');
     $routes->get('logout', 'Auth::logout');
 });
 
 // User Profile
 $routes->group('profile', function ($routes) {
     $routes->get('details', 'Profiles::profile_details');
-    $routes->get('edit', 'Profiles::edit_profile');
+    $routes->get('update', 'Profiles::edit_profile');
     $routes->post('update', 'Profiles::update_profile');
 
     $routes->get('change-profile-picture', 'Profiles::change_profile_picture');

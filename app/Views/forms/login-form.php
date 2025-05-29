@@ -1,4 +1,4 @@
-<form method="post" action="<?= base_url('authenticate') ?>">
+<form method="post" action="<?= base_url('login') ?>">
     <?= csrf_field() ?>
 
     <div class="mb-3">

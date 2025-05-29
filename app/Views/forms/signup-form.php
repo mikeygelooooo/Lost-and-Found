@@ -1,4 +1,4 @@
-<form method="post" action="<?= base_url('register') ?>">
+<form method="post" action="<?= base_url('signup') ?>">
     <?= csrf_field() ?>
 
     <div class="row mb-3">

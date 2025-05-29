@@ -9,18 +9,24 @@ class Auth extends Controller
 {
     public function signup()
     {
+        if (session()->has('user_id')) {
+            return redirect()->to('home');
+        }
         return view('auth/signup', ['title' => '| Sign Up']);
     }
 
     public function register()
     {
+        if (session()->has('user_id')) {
+            return redirect()->to('home');
+        }
+
         $userModel = new UserModel();
 
         $password = $this->request->getPost('password');
         $confirmPassword = $this->request->getPost('confirm_password');
 
         if ($password !== $confirmPassword) {
-            // Handle password mismatch (e.g. set flashdata and redirect back)
             session()->setFlashdata('error', 'Passwords do not match.');
             return redirect()->back()->withInput();
         }
@@ -43,24 +49,28 @@ class Auth extends Controller
         return redirect()->to('home');
     }
 
-
     public function login()
     {
+        if (session()->has('user_id')) {
+            return redirect()->to('home');
+        }
         return view('auth/login', ['title' => '| Log In']);
     }
 
     public function authenticate()
     {
+        if (session()->has('user_id')) {
+            return redirect()->to('home');
+        }
+
         $email = $this->request->getPost('email');
         $password = $this->request->getPost('password');
 
         $userModel = new UserModel();
         $user = $userModel->where('email', $email)->first();
 
-        // CHANGE LATER FOR HASHED PASSWORDS
         if ($user && password_verify($password, $user['password'])) {
             session()->set(['user_id' => $user['id']]);
-
             return redirect()->to('home');
         }
 
@@ -70,6 +80,10 @@ class Auth extends Controller
 
     public function logout()
     {
+        if (!session()->has('user_id')) {
+            return redirect()->to('login');
+        }
+
         session()->destroy();
 
         return redirect()->to(base_url('login'));

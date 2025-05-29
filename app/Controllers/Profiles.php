@@ -49,8 +49,6 @@ class Profiles extends Controller
         ];
 
         if ($userModel->update($user, $data)) {
-            // Update session variables
-            session()->set(['user_id' => $user['id']]);
             return redirect()->to(base_url('profile/details'))->with('success', 'Profile updated successfully.');
         } else {
             return redirect()->back()->withInput()->with('error', 'Failed to update profile.');

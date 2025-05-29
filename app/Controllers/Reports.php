@@ -23,6 +23,10 @@ class Reports extends BaseController
 
     public function new_report($report_type)
     {
+        if (!session()->get('user_id')) {
+            return redirect()->to('login');
+        }
+
         $model = new ReportsModel();
 
         $data = [
@@ -37,16 +41,24 @@ class Reports extends BaseController
 
     public function edit_report($id)
     {
-        $model = new ReportsModel();
+        if (!session()->get('user_id')) {
+            return redirect()->to('login');
+        }
 
+        $model = new ReportsModel();
         $report = $model->find($id);
 
+        // Check if report exists and user is the owner
+        if (!$report || $report['reported_by'] != session()->get('user_id')) {
+            return redirect()->to('reports')->with('error', 'Unauthorized access.');
+        }
+
         $data = [
-            'report'         => $report,
+            'report'      => $report,
             'categories'  => $model->getCategoryEnumValues(),
-            'form_action'  => base_url("reports/update/{$id}"),
-            'report_type'  => $report['report_type'],
-            'title'        => '| Edit Report'
+            'form_action' => base_url("reports/update/{$id}"),
+            'report_type' => $report['report_type'],
+            'title'       => '| Edit Report'
         ];
 
         return view('reports/edit-report', $data);
@@ -67,15 +79,20 @@ class Reports extends BaseController
 
     public function create_report()
     {
+        if (!session()->get('user_id')) {
+            return redirect()->to('login');
+        }
+
         $reportModel = new ReportsModel();
 
         $reportData = [
             'report_type'   => $this->request->getPost('report-type'),
             'item_name'     => $this->request->getPost('item-name'),
-            'category'   => $this->request->getPost('category'),
+            'category'      => $this->request->getPost('category'),
             'date_of_event' => $this->request->getPost('date-of-event'),
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
+            'reported_by'   => session()->get('user_id'), // Add user_id from session
         ];
 
         $reportModel->insert($reportData);
@@ -85,33 +102,47 @@ class Reports extends BaseController
 
     public function update_report($id)
     {
-        // Load the necessary models
-        $reportModel = new ReportsModel();
+        if (!session()->get('user_id')) {
+            return redirect()->to('login');
+        }
 
-        // Get input data
+        $reportModel = new ReportsModel();
+        $report = $reportModel->find($id);
+
+        // Check if report exists and user is the owner
+        if (!$report || $report['reported_by'] != session()->get('user_id')) {
+            return redirect()->to('reports')->with('error', 'Unauthorized access.');
+        }
+
         $data = [
             'item_name'     => $this->request->getPost('item-name'),
-            'category'   => $this->request->getPost('category'),
+            'category'      => $this->request->getPost('category'),
             'report_type'   => $this->request->getPost('report-type'),
             'date_of_event' => $this->request->getPost('date-of-event'),
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
         ];
 
-        // Update the report in the database
         if ($reportModel->update($id, $data)) {
-            // Redirect to the report details page or show a success message
             return redirect()->to(base_url('reports/details/' . $id))->with('message', 'Report updated successfully!');
         } else {
-            // Handle any failure in the update process
             return redirect()->to(base_url('reports/details/' . $id))->with('error', 'Failed to update the report.');
         }
     }
 
-
     public function delete_report($id)
     {
+        if (!session()->get('user_id')) {
+            return redirect()->to('login');
+        }
+
         $model = new ReportsModel();
+        $report = $model->find($id);
+
+        // Check if report exists and user is the owner
+        if (!$report || $report['reported_by'] != session()->get('user_id')) {
+            return redirect()->to('reports')->with('error', 'Unauthorized access.');
+        }
 
         if ($model->delete($id)) {
             return redirect()->to('reports')->with('message', 'Report deleted successfully.');

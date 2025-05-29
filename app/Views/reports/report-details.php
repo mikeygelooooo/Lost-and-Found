@@ -74,15 +74,19 @@
                         <div class="card-body">
                             <h6 class="card-subtitle mb-3">Reporter Information</h6>
                             <div class="row">
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <small class="text-muted">Reported By</small>
-                                    <p id="reportedBy" class="mb-0">John Doe</p>
+                                    <p id="reportedBy" class="mb-0"><?= esc($report['reported_by_name']) ?></p>
                                 </div>
-                                <div class="col-md-6">
-                                    <small class="text-muted">Contact Info</small>
-                                    <p id="contactInfo" class="mb-0">
-                                        <a href="mailto:johndoe@email.com" class="text-decoration-none">johndoe@email.com</a>
+                                <div class="col-md-4">
+                                    <small class="text-muted">Email</small>
+                                    <p id="contactEmail" class="mb-0">
+                                        <a href="mailto:<?= esc($report['reported_by_email']) ?>" class="text-decoration-none"><?= esc($report['reported_by_email']) ?></a>
                                     </p>
+                                </div>
+                                <div class="col-md-4">
+                                    <small class="text-muted">Phone</small>
+                                    <p id="contactPhone" class="mb-0"><?= esc($report['reported_by_phone']) ?></p>
                                 </div>
                             </div>
                         </div>
@@ -103,17 +107,19 @@
         </div>
         
         <!-- Card Footer -->
-        <div class="card-footer p-3">
-            <div class="d-flex justify-content-end">
-                <a href="<?= base_url('reports/update/' . $report['id']) ?>" class="btn btn-primary">
-                    Edit Report
-                </a>
-                <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');" class="ms-2">
-                    <?= csrf_field() ?>
-                    <button type="submit" class="btn btn-danger">Delete Report</button>
-                </form>
+        <?php if (session()->get('user_id') == $report['reported_by']): ?>
+            <div class="card-footer p-3">
+                <div class="d-flex justify-content-end">
+                    <a href="<?= base_url('reports/update/' . $report['id']) ?>" class="btn btn-primary">
+                        Edit Report
+                    </a>
+                    <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');" class="ms-2">
+                        <?= csrf_field() ?>
+                        <button type="submit" class="btn btn-danger">Delete Report</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        <?php endif; ?>
     </div>
 </div>
 <?= $this->endSection() ?>

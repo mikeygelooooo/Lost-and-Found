@@ -117,15 +117,17 @@
 </section>
 
 <!-- Call to Action -->
+<?php if (!session()->has('user_id')): ?>
 <section class="bg-body-tertiary text-center py-5" id="get-started">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-8">
                 <h2 class="display-6 mb-3 fw-bold">Join Our Community Today</h2>
                 <p class="lead mb-4">Help us create a world where lost items find their way back home</p>
-                <button class="btn btn-primary btn-lg px-5 py-3 fw-bold">Get Started - It's Free!</button>
+                <a href="<?= base_url('signup') ?>" class="btn btn-primary btn-lg px-5 py-3 fw-bold">Get Started - It's Free!</a>
             </div>
         </div>
     </div>
 </section>
+<?php endif; ?>
 <?= $this->endSection() ?>

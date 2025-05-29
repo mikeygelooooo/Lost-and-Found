@@ -22,7 +22,7 @@
 
 <div class="list-group list-group-flush text-start">
     <a href="<?= base_url('profile/details') ?>"
-        class="list-group-item list-group-item-action border-top <?= in_array(uri_string(), ['profile/details', 'profile/edit']) ? 'active' : '' ?>">
+        class="list-group-item list-group-item-action border-top <?= in_array(uri_string(), ['profile/details', 'profile/update']) ? 'active' : '' ?>">
         <i class="fas fa-user me-2"></i>PROFILE DETAILS
     </a>
 

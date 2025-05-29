@@ -17,6 +17,7 @@ class ReportsModel extends Model
         'location',
         'description',
         'image',
+        'reported_by',
         'created_at',
         'updated_at'
     ];
@@ -83,8 +84,9 @@ class ReportsModel extends Model
     // Report Details
     public function getReportById($id)
     {
-        return $this->where('reports.id', $id)
-            ->select('reports.*')
+        return $this->select('reports.*, CONCAT(users.first_name, " ", users.last_name) as reported_by_name, users.email as reported_by_email, users.phone_number as reported_by_phone')
+            ->join('users', 'users.id = reports.reported_by', 'left')
+            ->where('reports.id', $id)
             ->first();
     }
 

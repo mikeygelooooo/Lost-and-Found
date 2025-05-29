@@ -93,7 +93,16 @@ class Reports extends BaseController
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
             'reported_by'   => session()->get('user_id'), // Add user_id from session
+            // Handle image upload
+            'image' => null,
         ];
+
+        $imageFile = $this->request->getFile('image');
+        if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
+            $newName = $imageFile->getRandomName();
+            $imageFile->move(ROOTPATH . 'public/uploads/reports', $newName);
+            $reportData['image'] = $newName;
+        }
 
         $reportModel->insert($reportData);
 
@@ -122,6 +131,14 @@ class Reports extends BaseController
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
         ];
+
+        // Handle image upload for update
+        $imageFile = $this->request->getFile('image');
+        if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
+            $newName = $imageFile->getRandomName();
+            $imageFile->move(ROOTPATH . 'public/uploads/reports', $newName);
+            $data['image'] = $newName;
+        }
 
         if ($reportModel->update($id, $data)) {
             return redirect()->to(base_url('reports/details/' . $id))->with('message', 'Report updated successfully!');

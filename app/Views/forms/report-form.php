@@ -1,4 +1,4 @@
-<form method="post" action="<?= esc($form_action); ?>">
+<form method="post" action="<?= esc($form_action); ?>" enctype="multipart/form-data">
     <?= csrf_field() ?>
 
     <input type="hidden" name="report-type" value="<?= esc($report_type); ?>">
@@ -30,6 +30,11 @@
             <label for="location" class="form-label">Location<span class="text-danger">*</span></label>
             <input type="text" class="form-control" name="location" placeholder="Where did the event take place?" value="<?= esc($report['location'] ?? '') ?>" required>
         </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="image" class="form-label">Image</label>
+        <input type="file" class="form-control" name="image" accept="image/*">
     </div>
 
     <div class="mb-3">

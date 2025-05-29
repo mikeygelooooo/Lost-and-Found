@@ -79,9 +79,9 @@
                         <div class="card h-100 shadow-sm hover-shadow" style="transition: all 0.2s ease-in-out;">
                             <div class="position-relative">
                                 <?php if ($report['image'] != ''): ?>
-                                    <img src="/api/placeholder/400/300" class="card-img-top p-2" alt="<?= esc($report['item_name']) ?>">
+                                    <img src="<?= base_url('uploads/reports/' . esc($report['image'])) ?>" class="card-img-top" alt="<?= esc($report['item_name']) ?>" style="height: 180px; object-fit: cover;">
                                 <?php else: ?>
-                                    <div class="bg-light text-center p-4">
+                                    <div class="bg-light text-center d-flex align-items-center justify-content-center" style="height: 180px;">
                                         <i class="fas fa-image text-muted fa-3x"></i>
                                     </div>
                                 <?php endif; ?>

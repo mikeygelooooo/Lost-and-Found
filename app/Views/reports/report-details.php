@@ -32,9 +32,9 @@
         <div class="card-body container p-3">
             <div class="row mb-3">
             <?php if ($report['image'] != '') : ?>
-                <div class="col-md-6">
-                    <img id="itemImage" src="" alt="Item Image"
-                        class="img-fluid" style="max-height: 200px;">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img id="itemImage" src="<?= base_url('uploads/reports/' . esc($report['image'])) ?>" alt="Item Image"
+                        class="img-fluid my-3" style="max-height: 200px;">
                 </div>
                 <div class="col-md-6">
             <?php else : ?>

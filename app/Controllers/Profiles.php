@@ -91,4 +91,61 @@ class Profiles extends Controller
 
         return redirect()->back()->with('error', 'File upload failed.');
     }
+
+    public function account_settings()
+    {
+        $userModel = new UserModel();
+        $userId = session()->get('user_id');
+        $user = $userModel->find($userId);
+
+        $data = [
+            'user' => $user,
+            'title' => 'Account Settings'
+        ];
+
+        return view('profiles/account-settings', $data);
+    }
+
+    public function update_password()
+    {
+        $userModel = new UserModel();
+        $userId = session()->get('user_id');
+
+        $currentPassword = $this->request->getPost('current_password');
+        $newPassword = $this->request->getPost('new_password');
+        $confirmPassword = $this->request->getPost('confirm_password');
+
+        if ($newPassword !== $confirmPassword) {
+            return redirect()->back()->with('error', 'New passwords do not match.');
+        }
+
+        $user = $userModel->find($userId);
+
+        if (!password_verify($currentPassword, $user['password'])) {
+            return redirect()->back()->with('error', 'Current password is incorrect.');
+        }
+
+        $data = [
+            'password' => password_hash($newPassword, PASSWORD_DEFAULT)
+        ];
+
+        if ($userModel->update($userId, $data)) {
+            return redirect()->to(base_url('profile/details'))->with('message', 'Password updated successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to update password.');
+        }
+    }
+
+    public function delete_account()
+    {
+        $userModel = new UserModel();
+        $user = session()->get('user_id');
+
+        if ($userModel->delete($user)) {
+            session()->destroy();
+            return redirect()->to(base_url('login'))->with('message', 'Account deleted successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to delete account.');
+        }
+    }   
 }

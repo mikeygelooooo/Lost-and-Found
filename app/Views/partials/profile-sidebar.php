@@ -26,7 +26,7 @@
         <i class="fas fa-user me-2"></i>PROFILE DETAILS
     </a>
 
-    <a href="<?= base_url('user/activity') ?>" class="list-group-item list-group-item-action">
+    <a href="<?= base_url('profile/account-settings') ?>" class="list-group-item list-group-item-action <?= uri_string() === 'profile/account-settings' ? 'active' : '' ?>">
         <i class="fas fa-cog me-2"></i>ACCOUNT SETTINGS
     </a>
 </div>

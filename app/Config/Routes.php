@@ -27,6 +27,10 @@ $routes->group('profile', function ($routes) {
 
     $routes->get('change-profile-picture', 'Profiles::change_profile_picture');
     $routes->post('upload-profile-picture', 'Profiles::upload_profile_picture');
+
+    $routes->get('account-settings', 'Profiles::account_settings');
+    $routes->post('update-password', 'Profiles::update_password');
+    $routes->post('delete-account', 'Profiles::delete_account');
 });
 
 // About

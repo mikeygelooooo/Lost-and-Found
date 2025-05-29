@@ -47,10 +47,10 @@ $user = $userModel->find($userId);
                 </li>
 
 
-                <?php if ($user): ?>
+                <?php if (session()->has('user_id')): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-1"></i><?= strtoupper(esc($user['first_name'])) ?>
+                            <i class="fas fa-user me-1"></i><?= esc(strtoupper($user['first_name'])) ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>

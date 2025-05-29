@@ -1,3 +1,9 @@
+<?php
+$userModel = new \App\Models\UserModel();
+$userId = session()->get('user_id');
+$user = $userModel->find($userId);
+?>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow sticky-top">
     <div class="container-fluid px-4">
         <a class="navbar-brand" href="<?= base_url('/') ?>" style="font-family: 'Lobster';">
@@ -39,12 +45,12 @@
                         </li>
                     </ul>
                 </li>
-                <?php $session = session(); ?>
 
-                <?php if (session()->get('user_id')): ?>
+
+                <?php if ($user): ?>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user me-1"></i><?= strtoupper(esc($session->get('first_name'))) ?>
+                            <i class="fas fa-user me-1"></i><?= strtoupper(esc($user['first_name'])) ?>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>

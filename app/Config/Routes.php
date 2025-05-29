@@ -24,6 +24,9 @@ $routes->group('profile', function ($routes) {
     $routes->get('details', 'Profiles::profile_details');
     $routes->get('edit', 'Profiles::edit_profile');
     $routes->post('update', 'Profiles::update_profile');
+
+    $routes->get('change-profile-picture', 'Profiles::change_profile_picture');
+    $routes->post('upload-profile-picture', 'Profiles::upload_profile_picture');
 });
 
 // About

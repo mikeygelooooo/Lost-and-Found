@@ -38,14 +38,7 @@ class Auth extends Controller
         $userId = $userModel->getInsertID();
         $user = $userModel->find($userId);
 
-        session()->set([
-            'user_id'      => $user['id'],
-            'first_name'   => $user['first_name'],
-            'last_name'    => $user['last_name'],
-            'email'        => $user['email'],
-            'phone_number' => $user['phone_number'],
-            'isLoggedIn'   => true,
-        ]);
+        session()->set(['user_id' => $user['id']]);
 
         return redirect()->to('home');
     }
@@ -66,12 +59,7 @@ class Auth extends Controller
 
         // CHANGE LATER FOR HASHED PASSWORDS
         if ($user && password_verify($password, $user['password'])) {
-            session()->set([
-                'user_id'    => $user['id'],
-                'first_name' => $user['first_name'],
-                'last_name'  => $user['last_name'],
-                'email'      => $user['email'],
-            ]);
+            session()->set(['user_id' => $user['id']]);
 
             return redirect()->to('home');
         }

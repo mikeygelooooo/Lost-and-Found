@@ -48,8 +48,8 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end">
                             <li>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user text-success me-2"></i>User Profile
+                                <a class="dropdown-item" href="<?= base_url('profile/details') ?>">
+                                    <i class="fas fa-user text-success me-2"></i>Profile Details
                                 </a>
                             </li>
                             <li>
@@ -60,7 +60,8 @@
                         </ul>
                     </li>
                 <?php else: ?>
-                    <a class="nav-link <?= uri_string() == 'login' ? 'active' : '' ?>" href="<?= base_url('login') ?>">
+                    <?php $current = uri_string(); ?>
+                    <a class="nav-link <?= in_array($current, ['login', 'signup']) ? 'active' : '' ?>" href="<?= base_url('login') ?>">
                         <i class="fas fa-user me-1"></i>
                         LOG IN
                     </a>

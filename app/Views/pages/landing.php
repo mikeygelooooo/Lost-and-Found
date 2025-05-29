@@ -72,7 +72,7 @@
             <h2 class="h2 fw-bold">Recently Reported Items</h2>
         </div>
 
-        <div class="row g-4">
+        <div class="row g-4 mb-4">
             <?php if (!empty($reports)): ?>
                 <?php foreach ($reports as $index => $report): ?>
                     <div class="col-md-6 col-lg-4 col-xl-3">
@@ -130,7 +130,7 @@
             <?php endif; ?>
         </div>
 
-        <div class="text-center mt-5">
+        <div class="text-center">
             <a href="<?= base_url('reports') ?>" class="btn btn-primary btn-lg px-4">View All Items</a>
         </div>
     </div>

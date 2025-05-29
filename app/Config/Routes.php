@@ -19,6 +19,13 @@ $routes->group('', function($routes) {
     $routes->get('logout', 'Auth::logout');
 });
 
+// User Profile
+$routes->group('profile', function ($routes) {
+    $routes->get('details', 'Profiles::profile_details');
+    $routes->get('edit', 'Profiles::edit_profile');
+    $routes->post('update', 'Profiles::update_profile');
+});
+
 // About
 $routes->group('about', function ($routes) {
     $routes->get('', 'Pages::about');

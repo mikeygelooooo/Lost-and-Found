@@ -36,6 +36,20 @@
             value="<?= old('phone_number') ?>">
     </div>
 
+    <div class="form-check mb-4">
+        <input class="form-check-input" type="checkbox" required>
+        <label class="form-check-label">
+            I agree to the
+            <a class="text-decoration-none" href=<?= base_url('about/privacy-policy') ?> target="_blank">
+                Privacy Policy
+            </a>
+            and
+            <a class="text-decoration-none" href=<?= base_url('about/privacy-policy') ?> target="_blank">
+                Terms of Service
+            </a>
+        </label>
+    </div>
+
     <button type="submit" class="btn btn-primary w-100 mb-3">SIGN UP</button>
 
     <div class="text-center">

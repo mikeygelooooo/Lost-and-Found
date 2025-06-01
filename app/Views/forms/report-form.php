@@ -42,6 +42,13 @@
         <textarea class="form-control" name="description" rows="3"><?= esc($report['description'] ?? '') ?></textarea>
     </div>
 
+    <?php if ($report_type == 'found') : ?>
+        <div class="mb-3">
+            <label for="current_location" class="form-label">Current Location of Item<span class="text-danger">*</span></label>
+            <textarea class="form-control" name="current_location" rows="1" required><?= esc($report['current_location'] ?? '') ?></textarea>
+        </div>
+    <?php endif; ?>
+
     <div class="d-grid gap-2">
         <button type="submit" class="btn <?= ($report_type == 'lost') ? 'btn-danger' : 'btn-success' ?>">
             <?php if (empty($report)) : ?>

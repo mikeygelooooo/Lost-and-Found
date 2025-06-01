@@ -92,7 +92,8 @@ class Reports extends BaseController
             'date_of_event' => $this->request->getPost('date-of-event'),
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
-            'reported_by'   => session()->get('user_id'), // Add user_id from session
+            'current_location' => $this->request->getPost('current_location') ?? null,
+            'reported_by'   => session()->get('user_id'),
             // Handle image upload
             'image' => null,
         ];
@@ -130,11 +131,19 @@ class Reports extends BaseController
             'date_of_event' => $this->request->getPost('date-of-event'),
             'location'      => $this->request->getPost('location'),
             'description'   => $this->request->getPost('description'),
+            'current_location' => $this->request->getPost('current_location') ?? null,
         ];
 
         // Handle image upload for update
         $imageFile = $this->request->getFile('image');
         if ($imageFile && $imageFile->isValid() && !$imageFile->hasMoved()) {
+            // Delete the old image if it exists
+            if (!empty($report['image'])) {
+                $oldImagePath = ROOTPATH . 'public/uploads/reports/' . $report['image'];
+                if (is_file($oldImagePath)) {
+                    @unlink($oldImagePath);
+                }
+            }
             $newName = $imageFile->getRandomName();
             $imageFile->move(ROOTPATH . 'public/uploads/reports', $newName);
             $data['image'] = $newName;

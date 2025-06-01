@@ -79,8 +79,20 @@ class Profiles extends Controller
         $file = $this->request->getFile('profile_picture');
 
         if ($file->isValid() && !$file->hasMoved()) {
+            // Get current user data
+            $userData = $userModel->find($user);
+            $oldPicture = isset($userData['profile_picture']) ? $userData['profile_picture'] : 'blank.jpg';
+
             $newName = $file->getRandomName();
             $file->move(ROOTPATH . 'public/uploads/profile_pictures', $newName);
+
+            // Delete old profile picture if not blank.jpg
+            if ($oldPicture && $oldPicture !== 'blank.jpg') {
+                $oldPath = ROOTPATH . 'public/uploads/profile_pictures/' . $oldPicture;
+                if (is_file($oldPath)) {
+                    @unlink($oldPath);
+                }
+            }
 
             $userModel->update($user, ['profile_picture' => $newName]);
 

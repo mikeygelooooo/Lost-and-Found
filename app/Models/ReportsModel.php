@@ -16,6 +16,7 @@ class ReportsModel extends Model
         'date_of_event',
         'location',
         'description',
+        'current_location',
         'image',
         'reported_by',
         'created_at',

@@ -39,9 +39,9 @@
         <div class="row mb-3">
             <!-- Image Column -->
             <?php if ($report['image'] != '') : ?>
-                <div class="col-md-6">
-                    <img id="itemImage" src="" alt="Item Image"
-                        class="img-fluid" style="max-height: 200px;">
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <img id="itemImage" src="<?= base_url('uploads/reports/' . esc($report['image'])) ?>" alt="Item Image"
+                        class="img-fluid my-3" style="max-height: 200px;">
                 </div>
 
                 <div class="col-md-6">
@@ -54,7 +54,7 @@
                     <div class="row mb-3">
                         <div class="col-6">
                             <small class="text-muted">Category</small>
-                            <p id="itemCategory" class="mb-0"><?= esc($report['category_name']) ?></p>
+                            <p id="itemCategory" class="mb-0"><?= esc($report['category']) ?></p>
                         </div>
                         <div class="col-6">
                             <small class="text-muted">Report Type</small>

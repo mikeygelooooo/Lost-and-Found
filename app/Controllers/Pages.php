@@ -20,6 +20,11 @@ class Pages extends BaseController
         return view('pages/about', ['title' => '| About Us']);
     }
 
+    public function contact()
+    {
+        return view('pages/contact', ['title' => '| Contact Us']);
+    }
+
     public function privacy_policy()
     {
         return view('pages/privacy-policy', ['title' => '| Privacy Policy']);

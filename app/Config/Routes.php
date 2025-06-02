@@ -28,6 +28,8 @@ $routes->group('profile', function ($routes) {
     $routes->get('change-profile-picture', 'Profiles::change_profile_picture');
     $routes->post('upload-profile-picture', 'Profiles::upload_profile_picture');
 
+    $routes->get('report-history', 'Profiles::report_history');
+
     $routes->get('account-settings', 'Profiles::account_settings');
     $routes->post('update-password', 'Profiles::update_password');
     $routes->post('delete-account', 'Profiles::delete_account');
@@ -36,6 +38,7 @@ $routes->group('profile', function ($routes) {
 // About
 $routes->group('about', function ($routes) {
     $routes->get('', 'Pages::about');
+    $routes->get('contact', 'Pages::contact');
     $routes->get('privacy-policy', 'Pages::privacy_policy');
     $routes->get('terms-of-service', 'Pages::terms_of_service');
 });
@@ -53,6 +56,7 @@ $routes->group('reports', function ($routes) {
     // Update Report
     $routes->get('update/(:num)', 'Reports::edit_report/$1');
     $routes->post('update/(:num)', 'Reports::update_report/$1');
+    $routes->post('update/status/(:num)', 'Reports::update_status/$1');
 
     // Delete Report
     $routes->post('delete/(:num)', 'Reports::delete_report/$1');

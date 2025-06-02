@@ -1,6 +1,6 @@
 <div class="card-body p-4">
     <!-- Profile Picture -->
-    <div class="mx-auto ratio ratio-1x1 mb-3" style="max-width: 200px;">
+    <div class="mx-auto ratio ratio-1x1 mb-3" style="max-width: 150px;">
         <img src="<?= base_url(
                         empty($user['profile_picture'])
                             ? 'uploads/profile_pictures/blank.jpg'
@@ -24,6 +24,11 @@
     <a href="<?= base_url('profile/details') ?>"
         class="list-group-item list-group-item-action border-top <?= in_array(uri_string(), ['profile/details', 'profile/update']) ? 'active' : '' ?>">
         <i class="fas fa-user me-2"></i>PROFILE DETAILS
+    </a>
+
+    <a href="<?= base_url('profile/report-history') ?>"
+        class="list-group-item list-group-item-action border-top <?= uri_string() === 'profile/report-history' ? 'active' : '' ?>">
+        <i class="fas fa-clock me-2"></i>REPORT HISTORY
     </a>
 
     <a href="<?= base_url('profile/account-settings') ?>" class="list-group-item list-group-item-action <?= uri_string() === 'profile/account-settings' ? 'active' : '' ?>">

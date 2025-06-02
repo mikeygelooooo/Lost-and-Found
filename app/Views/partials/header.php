@@ -59,6 +59,16 @@ $user = $userModel->find($userId);
                                 </a>
                             </li>
                             <li>
+                                <a class="dropdown-item" href="<?= base_url('profile/report-history') ?>">
+                                    <i class="fas fa-clock text-success me-2"></i>Report History
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" href="<?= base_url('profile/account-settings') ?>">
+                                    <i class="fas fa-cog text-success me-2"></i>Account Settings
+                                </a>
+                            </li>
+                            <li>
                                 <a class="dropdown-item" href="<?= base_url('logout') ?>">
                                     <i class="fas fa-right-from-bracket text-danger me-2"></i>Log Out
                                 </a>

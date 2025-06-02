@@ -84,7 +84,7 @@
                         </div>
                         <h3 class="h4 fw-bold">Contact Us</h3>
                         <p class="mb-3">Have questions or need help? We're here to assist you.</p>
-                        <a href="#" class="btn btn-secondary">Get in Touch</a>
+                        <a href="<?= base_url('about/contact') ?>" class="btn btn-secondary">Get in Touch</a>
                     </div>
                 </div>
             </div>
@@ -117,7 +117,6 @@
 </section>
 
 <!-- Call to Action -->
-<?php if (!session()->has('user_id')): ?>
 <section class="bg-body-tertiary text-center py-5" id="get-started">
     <div class="container">
         <div class="row justify-content-center">
@@ -129,5 +128,4 @@
         </div>
     </div>
 </section>
-<?php endif; ?>
 <?= $this->endSection() ?>

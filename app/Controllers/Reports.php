@@ -156,6 +156,27 @@ class Reports extends BaseController
         }
     }
 
+    public function update_status($id)
+    {
+        $reportModel = new ReportsModel();
+
+        $report = $reportModel->find($id);
+        if (!$report) {
+            return redirect()->back()->with('error', 'Report not found.');
+        }
+
+        // Only the owner can change the status
+        if (session()->get('user_id') != $report['reported_by']) {
+            return redirect()->back()->with('error', 'Unauthorized action.');
+        }
+
+        $newStatus = $this->request->getPost('status');
+        $reportModel->update($id, ['status' => $newStatus]);
+
+        return redirect()->back()->with('message', 'Status updated successfully.');
+    }
+
+
     public function delete_report($id)
     {
         if (!session()->get('user_id')) {

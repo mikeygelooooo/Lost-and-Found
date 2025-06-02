@@ -19,6 +19,7 @@ class ReportsModel extends Model
         'current_location',
         'image',
         'reported_by',
+        'status',
         'created_at',
         'updated_at'
     ];
@@ -26,7 +27,8 @@ class ReportsModel extends Model
     // Landing Page Queries
     public function landingAllReports()
     {
-        return $this->select('reports.*')
+        return $this->where('status !=', 'resolved')
+            ->select('reports.*')
             ->orderBy('reports.created_at', 'DESC') // Order by latest first
             ->limit(8) // Limit to 8 results
             ->findAll();
@@ -62,7 +64,8 @@ class ReportsModel extends Model
     // All Reports
     public function getAllReports()
     {
-        return $this->select('reports.*')
+        return $this->where('status !=', 'resolved')
+            ->select('reports.*')
             ->orderBy('reports.created_at', 'DESC') // Order by latest first
             ->findAll();
     }
@@ -89,6 +92,14 @@ class ReportsModel extends Model
             ->join('users', 'users.id = reports.reported_by', 'left')
             ->where('reports.id', $id)
             ->first();
+    }
+
+    public function getReportsByUser($userId)
+    {
+        return $this->where('reported_by', $userId)
+            ->select('reports.*')
+            ->orderBy('reports.created_at', 'DESC')
+            ->findAll();
     }
 
     public function getCategoryEnumValues()

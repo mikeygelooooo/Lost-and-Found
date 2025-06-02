@@ -32,11 +32,11 @@
         <div class="card-body container p-3">
             <div class="row mb-3">
             <?php if ($report['image'] != '') : ?>
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                <div class="col-md-5 d-flex justify-content-center align-items-center">
                     <img id="itemImage" src="<?= base_url('uploads/reports/' . esc($report['image'])) ?>" alt="Item Image"
-                        class="img-fluid my-3" style="max-height: 200px;">
+                        class="img-fluid my-3 rounded border border-3 border-primary" style="max-height: 200px;">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-7">
             <?php else : ?>
                 <div class="col-md-12">
             <?php endif; ?>
@@ -48,12 +48,29 @@
                         </div>
                         <div class="col-6">
                             <small class="text-muted">Report Type</small>
-                            <p class="mb-0"><?= ucfirst(esc($report['report_type'])) ?> Item</p>
+                            <p class="mb-0">
+                                <span class="badge <?= $report['report_type'] == 'lost' ? 'bg-danger' : 'bg-success' ?> fs-6">
+                                    <i class="fas <?= $report['report_type'] == 'lost' ? 'fa-search-minus' : 'fa-hand-holding' ?>"></i>
+                                    <?= ucfirst($report['report_type']) ?>
+                                </span>
+                            </p>
                         </div>
                     </div>
-                    <div class="mb-3">
-                        <small class="text-muted">Description</small>
-                        <p id="itemDescription" class="mb-0"><?= esc($report['description']) ?></p>
+
+                    <div class="row mb-3">
+                        <div class="col-6">
+                            <small class="text-muted">Description</small>
+                            <p id="itemDescription" class="mb-0"><?= esc($report['description']) ?></p>
+                        </div>
+                        <div class="col-6">
+                            <small class="text-muted">Report Status</small>
+                            <p class="mb-0">
+                                <span class="badge <?= $report['status'] == 'resolved' ? 'bg-info' : 'bg-warning' ?> fs-6">
+                                    <i class="fas <?= $report['status'] == 'resolved' ? 'fa-check-circle' : 'fa-hourglass-half' ?>"></i>
+                                    <?= ucfirst($report['status']) ?>
+                                </span>
+                            </p>
+                        </div>
                     </div>
                     <div class="row mb-2">
                         <div class="col-6">
@@ -113,6 +130,13 @@
                     <a href="<?= base_url('reports/update/' . $report['id']) ?>" class="btn btn-primary">
                         Edit Report
                     </a>
+                    <form action="<?= base_url('reports/update/status/' . $report['id']) ?>" method="post">
+                        <?= csrf_field() ?>
+                        <input type="hidden" name="status" value="<?= $report['status'] == 'pending' ? 'resolved' : 'pending' ?>">
+                        <button type="submit" class="btn <?= $report['status'] == 'pending' ? 'btn-info' : 'btn-warning' ?> ms-2">
+                            Mark as <?= $report['status'] == 'pending' ? 'Resolved' : 'Pending' ?>
+                        </button>
+                    </form>
                     <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');" class="ms-2">
                         <?= csrf_field() ?>
                         <button type="submit" class="btn btn-danger">Delete Report</button>

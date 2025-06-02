@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\UserModel;
+use App\Models\ReportsModel;
 use CodeIgniter\Controller;
 
 class Profiles extends Controller
@@ -100,6 +101,24 @@ class Profiles extends Controller
         }
 
         return redirect()->back()->with('error', 'File upload failed.');
+    }
+
+    public function report_history()
+    {
+        $userModel = new UserModel();
+        $userId = session()->get('user_id');
+        $user = $userModel->find($userId);
+
+        $reportsModel = new ReportsModel();
+        $reports = $reportsModel->getReportsByUser($userId);
+
+        $data = [
+            'user' => $user,
+            'reports' => $reports,
+            'title' => 'Item Report History'
+        ];
+
+        return view('profiles/report-history', $data);
     }
 
     public function account_settings()

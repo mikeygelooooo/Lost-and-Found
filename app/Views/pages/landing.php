@@ -3,32 +3,10 @@
 <?= $this->section('content') ?>
 <section class="bg-body-tertiary py-5" id="search">
     <div class="container">
-        <div class="row justify-content-center text-center mb-4">
+        <div class="row justify-content-center text-center">
             <div class="col-lg-8">
                 <h1 class="display-4 fw-bold mb-3">Find What You've Lost</h1>
-                <p class="lead mb-4">Our community helps reunite people with their lost belongings every day</p>
-            </div>
-        </div>
-
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="bg-white p-4 rounded shadow">
-                    <form class="row g-3">
-                        <div class="col-md-5">
-                            <select class="form-select form-select-lg">
-                                <option selected>I'm looking for...</option>
-                                <option>Lost Items</option>
-                                <option>Found Items</option>
-                            </select>
-                        </div>
-                        <div class="col-md-5">
-                            <input type="text" class="form-control form-control-lg" placeholder="Keywords (phone, wallet, keys...)">
-                        </div>
-                        <div class="col-md-2">
-                            <button type="submit" class="btn btn-primary btn-lg w-100">Search</button>
-                        </div>
-                    </form>
-                </div>
+                <p class="lead">Our community helps reunite people with their lost belongings every day</p>
             </div>
         </div>
     </div>
@@ -186,7 +164,6 @@
     </div>
 </section>
 
-<?php if (!session()->has('user_id')): ?>
 <section class="bg-body-tertiary text-center py-5" id="get-started">
     <div class="container">
         <div class="row justify-content-center">
@@ -198,5 +175,4 @@
         </div>
     </div>
 </section>
-<?php endif; ?>
 <?= $this->endSection() ?>

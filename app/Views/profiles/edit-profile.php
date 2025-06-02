@@ -17,14 +17,14 @@
     <?php endif; ?>
 
     <div class="row justify-content-center g-4">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div class="card shadow border-0 text-center">
                 <?= $this->include('partials/profile-sidebar') ?>
             </div>
         </div>
 
         <!-- Right Section: Profile Details Form -->
-        <div class="col-md-8">
+        <div class="col-md-9">
             <div class="card shadow border-0">
                 <div class="card-header bg-primary text-white">
                     <h4 class="mb-0"><i class="fas fa-circle-user me-2"></i>Edit Profile Details</h4>

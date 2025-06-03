@@ -33,6 +33,13 @@ class ReportsModel extends Model
             ->findAll();
     }
 
+    public function getAllReportsAdmin()
+    {
+        return $this->select('reports.*')
+            ->orderBy('reports.created_at', 'DESC') // Order by latest first
+            ->findAll();
+    }
+
     public function getReportById($id)
     {
         return $this->select('reports.*, CONCAT(users.first_name, " ", users.last_name) as reported_by_name, users.email as reported_by_email, users.phone_number as reported_by_phone')

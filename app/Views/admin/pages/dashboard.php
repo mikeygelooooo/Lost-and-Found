@@ -1,6 +1,20 @@
 <?= $this->extend('admin/admin-base') ?>
 
 <?= $this->section('content') ?>
+<?php if (session()->getFlashdata('message')): ?>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <?= session()->getFlashdata('message') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
+<?php if (session()->getFlashdata('error')): ?>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <?= session()->getFlashdata('error') ?>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+<?php endif; ?>
+
 <div class="content-header">
     <div class="container-fluid">
         <div class="row">
@@ -20,10 +34,10 @@
                     <p>Lost Reports</p>
                 </div>
                 <div class="icon"><i class="fas fa-search"></i></div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="<?= base_url('admin/reports') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
             <div>
-                <a href="#" class="btn btn-danger btn-block"><i class="fas fa-plus"></i> Add Lost Item</a>
+                <a href="<?= base_url('admin/reports/create/lost') ?>" class="btn btn-danger btn-block"><i class="fas fa-plus"></i> Add Lost Item</a>
             </div>
         </div>
 
@@ -34,10 +48,10 @@
                     <p>Found Reports</p>
                 </div>
                 <div class="icon"><i class="fas fa-box"></i></div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="<?= base_url('admin/reports') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
             <div>
-                <a href="#" class="btn btn-success btn-block"><i class="fas fa-plus"></i> Add Found Item</a>
+                <a href="<?= base_url('admin/reports/create/found') ?>" class="btn btn-success btn-block"><i class="fas fa-plus"></i> Add Found Item</a>
             </div>
         </div>
 
@@ -48,10 +62,10 @@
                     <p>Pending Reports</p>
                 </div>
                 <div class="icon"><i class="fas fa-hourglass-half"></i></div>
-                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                <a href="<?= base_url('admin/reports') ?>" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
             <div>
-                <a href="#" class="btn btn-warning btn-block"><i class="fas fa-search"></i> View Reports</a>
+                <a href="<?= base_url('admin/reports') ?>" class="btn btn-warning btn-block"><i class="fas fa-search"></i> View Reports</a>
             </div>
         </div>
 

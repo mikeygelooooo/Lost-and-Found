@@ -24,6 +24,22 @@
 </div>
 
 <div class="container-fluid">
+    <?php if (session()->getFlashdata('message')): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('message') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('error') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="container-fluid">
     <div class="card">
         <div class="card-body container p-4">
             <div class="row mb-3">
@@ -117,17 +133,17 @@
 
         <div class="card-footer p-3">
             <div class="d-flex justify-content-end flex-wrap gap-2">
-                <a href="<?= base_url('reports/update/' . $report['id']) ?>" class="btn btn-primary">
+                <a href="<?= base_url('admin/reports/update/' . $report['id']) ?>" class="btn btn-primary">
                     Edit Report
                 </a>
-                <form action="<?= base_url('reports/update/status/' . $report['id']) ?>" method="post">
+                <form action="<?= base_url('admin/reports/update/status/' . $report['id']) ?>" method="post">
                     <?= csrf_field() ?>
                     <input type="hidden" name="status" value="<?= $report['status'] == 'pending' ? 'resolved' : 'pending' ?>">
                     <button type="submit" class="btn <?= $report['status'] == 'pending' ? 'btn-info' : 'btn-warning' ?>">
                         Mark as <?= $report['status'] == 'pending' ? 'Resolved' : 'Pending' ?>
                     </button>
                 </form>
-                <form action="<?= base_url('reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');">
+                <form action="<?= base_url('admin/reports/delete/' . $report['id']) ?>" method="post" onsubmit="return confirm('Are you sure you want to delete this report?');">
                     <?= csrf_field() ?>
                     <button type="submit" class="btn btn-danger">Delete Report</button>
                 </form>

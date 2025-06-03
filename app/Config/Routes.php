@@ -67,5 +67,22 @@ $routes->group('admin', function ($routes) {
     $routes->get('', 'Admin\Pages::dashboard');
     $routes->get('dashboard', 'Admin\Pages::dashboard');
 
+    // Reports Management
+    $routes->get('reports', 'Admin\Reports::reports');
     $routes->get('reports/details/(:num)', 'Admin\Reports::report_details/$1');
+
+    // Create Report
+    $routes->post('reports/create', 'Admin\Reports::create_report');
+    $routes->get('reports/create/(:segment)', 'Admin\Reports::new_report/$1');
+
+    // Update Report
+    $routes->get('reports/update/(:num)', 'Admin\Reports::edit_report/$1');
+    $routes->post('reports/update/(:num)', 'Admin\Reports::update_report/$1');
+
+    // Update Report Status
+    $routes->post('reports/update/status/(:num)', 'Admin\Reports::update_status/$1');
+
+    // Delete Report
+    $routes->post('reports/delete/(:num)', 'Admin\Reports::delete_report/$1');
+    
 });

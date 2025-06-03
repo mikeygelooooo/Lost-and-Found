@@ -18,7 +18,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">
+                    <a href="<?= base_url('admin/reports') ?>" class="nav-link">
                         <i class="nav-icon fas fa-flag"></i>
                         <p>Reports Management</p>
                     </a>

@@ -7,65 +7,65 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // Home
-$routes->get('/', 'Pages::landing');
-$routes->get('home', 'Pages::landing');
+$routes->get('/', 'User\Pages::landing');
+$routes->get('home', 'User\Pages::landing');
 
 // Auth
 $routes->group('', function($routes) {
-    $routes->get('signup', 'Auth::signup');
-    $routes->post('signup', 'Auth::register');
-    $routes->get('login', 'Auth::login');
-    $routes->post('login', 'Auth::authenticate');
-    $routes->get('logout', 'Auth::logout');
+    $routes->get('signup', 'User\Auth::signup');
+    $routes->post('signup', 'User\Auth::register');
+    $routes->get('login', 'User\Auth::login');
+    $routes->post('login', 'User\Auth::authenticate');
+    $routes->get('logout', 'User\Auth::logout');
 });
 
 // User Profile
 $routes->group('profile', function ($routes) {
-    $routes->get('details', 'Profiles::profile_details');
-    $routes->get('update', 'Profiles::edit_profile');
-    $routes->post('update', 'Profiles::update_profile');
+    $routes->get('details', 'User\Profiles::profile_details');
+    $routes->get('update', 'User\Profiles::edit_profile');
+    $routes->post('update', 'User\Profiles::update_profile');
 
-    $routes->get('change-profile-picture', 'Profiles::change_profile_picture');
-    $routes->post('upload-profile-picture', 'Profiles::upload_profile_picture');
+    $routes->get('change-profile-picture', 'User\Profiles::change_profile_picture');
+    $routes->post('upload-profile-picture', 'User\Profiles::upload_profile_picture');
 
-    $routes->get('report-history', 'Profiles::report_history');
+    $routes->get('report-history', 'User\Profiles::report_history');
 
-    $routes->get('account-settings', 'Profiles::account_settings');
-    $routes->post('update-password', 'Profiles::update_password');
-    $routes->post('delete-account', 'Profiles::delete_account');
+    $routes->get('account-settings', 'User\Profiles::account_settings');
+    $routes->post('update-password', 'User\Profiles::update_password');
+    $routes->post('delete-account', 'User\Profiles::delete_account');
 });
 
 // About
 $routes->group('about', function ($routes) {
-    $routes->get('', 'Pages::about');
-    $routes->get('contact', 'Pages::contact');
-    $routes->get('privacy-policy', 'Pages::privacy_policy');
-    $routes->get('terms-of-service', 'Pages::terms_of_service');
+    $routes->get('', 'User\Pages::about');
+    $routes->get('contact', 'User\Pages::contact');
+    $routes->get('privacy-policy', 'User\Pages::privacy_policy');
+    $routes->get('terms-of-service', 'User\Pages::terms_of_service');
 });
 
 // Reports
 $routes->group('reports', function ($routes) {
     // Browse Reports
-    $routes->get('', 'Reports::reports');
-    $routes->get('details/(:num)', 'Reports::report_details/$1');
+    $routes->get('', 'User\Reports::reports');
+    $routes->get('details/(:num)', 'User\Reports::report_details/$1');
 
     // Create Report
-    $routes->post('create', 'Reports::create_report');
-    $routes->get('create/(:segment)', 'Reports::new_report/$1');
+    $routes->post('create', 'User\Reports::create_report');
+    $routes->get('create/(:segment)', 'User\Reports::new_report/$1');
 
     // Update Report
-    $routes->get('update/(:num)', 'Reports::edit_report/$1');
-    $routes->post('update/(:num)', 'Reports::update_report/$1');
-    $routes->post('update/status/(:num)', 'Reports::update_status/$1');
+    $routes->get('update/(:num)', 'User\Reports::edit_report/$1');
+    $routes->post('update/(:num)', 'User\Reports::update_report/$1');
+    $routes->post('update/status/(:num)', 'User\Reports::update_status/$1');
 
     // Delete Report
-    $routes->post('delete/(:num)', 'Reports::delete_report/$1');
+    $routes->post('delete/(:num)', 'User\Reports::delete_report/$1');
 });
 
 // Admin
 $routes->group('admin', function ($routes) {
-    $routes->get('', 'Admin::dashboard');
-    $routes->get('dashboard', 'Admin::dashboard');
+    $routes->get('', 'Admin\Pages::dashboard');
+    $routes->get('dashboard', 'Admin\Pages::dashboard');
 
-    $routes->get('reports/details/(:num)', 'Admin::report_details/$1');
+    $routes->get('reports/details/(:num)', 'Admin\Reports::report_details/$1');
 });

@@ -5,51 +5,72 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="m-0">Reports Management</h1>
+                <h1 class="m-0">User Management</h1>
             </div>
         </div>
     </div>
 </div>
 
 <div class="container-fluid">
+    <?php if (session()->getFlashdata('message')): ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('message') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+
+    <?php if (session()->getFlashdata('error')): ?>
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <?= session()->getFlashdata('error') ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    <?php endif; ?>
+</div>
+
+<div class="container-fluid">
     <div class="card">
+        <div class="card-header">
+            <div class="card-tools">
+                <a href="" class="btn btn-primary btn-sm">
+                    <i class="fas fa-plus"></i> New User
+                </a>
+            </div>
+        </div>
         <div class="card-body">
-            <table id="reportsTable" class="table table-bordered table-striped table-hover">
+            <table id="reportsTable" class="table table-responsive table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Type</th>
-                        <th>Item</th>
-                        <th>Category</th>
-                        <th>Date</th>
-                        <th>Location</th>
-                        <th>Status</th>
-                        <th>Actions</th>
+                        <th class="no-wrap">ID</th>
+                        <th class="no-wrap w-25">First Name</th>
+                        <th class="no-wrap w-25">Last Name</th>
+                        <th class="no-wrap w-25">Email</th>
+                        <th class="no-wrap w-25">Phone Number</th>
+                        <th class="no-wrap">Role</th>
+                        <th class="no-wrap"></th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($reports as $r): ?>
+                    <?php foreach ($users as $user): ?>
                         <tr>
-                            <td><?= esc($r['id']) ?></td>
-                            <td>
-                                <span class="badge badge-<?= $r['report_type'] === 'found' ? 'success' : 'danger' ?>">
-                                    <?= ucfirst(esc($r['report_type'])) ?>
+                            <td class="text-nowrap"><?= esc($user['id']) ?></td>
+                            <td class="text-nowrap"><?= esc($user['first_name']) ?></td>
+                            <td class="text-nowrap"><?= esc($user['last_name']) ?></td>
+                            <td class="text-nowrap"><?= esc($user['email']) ?></td>
+                            <td class="text-nowrap"><?= esc($user['phone_number']) ?></td>
+                            <td class="text-nowrap">
+                                <span class="badge text-dark badge-<?= $user['role'] === 'admin' ? 'info' : 'warning' ?>">
+                                    <?= ucfirst(esc($user['role'])) ?>
                                 </span>
                             </td>
-                            <td><?= esc($r['item_name']) ?></td>
-                            <td><?= esc($r['category']) ?></td>
-                            <td><?= esc($r['date_of_event']) ?></td>
-                            <td><?= esc($r['location']) ?></td>
-                            <td>
-                                <span class="badge text-dark badge-<?= $r['status'] === 'resolved' ? 'info' : 'warning' ?>">
-                                    <?= ucfirst(esc($r['status'])) ?>
-                                </span>
+                            <td class="text-nowrap">
+                                <a href="<?= base_url('admin/users/details/' . $user['id']) ?>" class="btn btn-outline-dark btn-sm"><i class="fas fa-eye"></i></a>
+                                <a href="<?= base_url('admin/users/update/' . $user['id']) ?>" class="btn btn-outline-primary btn-sm"><i class="fas fa-edit"></i></a>
+                                <form action="<?= base_url('admin/users/delete/' . $user['id']) ?>" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                                    <?= csrf_field() ?>
+                                    <button type="submit" class="btn btn-outline-danger btn-sm"><i class="fas fa-trash"></i></button>
+                                </form>
                             </td>
-                            <td>
-                                <a href="<?= site_url('admin/reports/details/' . $r['id']) ?>" class="btn btn-outline-dark btn-sm">
-                                    <i class="fas fa-eye"></i>
-                                </a>
-                            </td>
+
                         </tr>
                     <?php endforeach; ?>
                 </tbody>

@@ -30,7 +30,7 @@
                     <h4 class="mb-0"><i class="fas fa-camera me-2"></i>Change Profile Picture</h4>
                 </div>
                 <div class="card-body">
-                    <form action="<?= site_url('profile/upload-profile-picture') ?>" method="post" enctype="multipart/form-data">
+                    <form action="<?= site_url('profile/update/profile-picture') ?>" method="post" enctype="multipart/form-data">
                         <?= csrf_field() ?>
                         <div class="mb-3">
                             <label for="profile_picture" class="form-label">Select Profile Picture</label>

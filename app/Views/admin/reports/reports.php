@@ -40,7 +40,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="reportsTable" class="table table-responsive table-bordered table-striped table-hover">
+            <table id="reportsTable" class="table table-responsive table-bordered table-hover">
                 <thead>
                     <tr>
                         <th class="text-nowrap">ID</th>

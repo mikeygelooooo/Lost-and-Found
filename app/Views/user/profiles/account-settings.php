@@ -34,7 +34,7 @@
                     <h5 class="mb-3 text-primary fw-bold">
                         <i class="fas fa-key me-2"></i>Change Password
                     </h5>
-                    <form action="<?= site_url('profile/update-password') ?>" method="post">
+                    <form action="<?= site_url('profile/update/password') ?>" method="post">
                         <div class="mb-3">
                             <label for="currentPassword" class="form-label">Current Password</label>
                             <input type="password" class="form-control" id="currentPassword" name="current_password" placeholder="Enter current password" required>

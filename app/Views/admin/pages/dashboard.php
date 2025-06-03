@@ -76,14 +76,16 @@
                     <p>Active Users</p>
                 </div>
                 <div class="icon"><i class="fas fa-users"></i></div>
-                <a href="#" class="small-box-footer">
+                <a href="<?= base_url('admin/users') ?>" class="small-box-footer">
                     <span class="text-dark">
                         More info <i class="fas fa-arrow-circle-right"></i>
                     </span>
                 </a>
             </div>
             <div>
-                <a href="#" class="btn btn-info btn-block"><i class="fas fa-user-gear"></i> Manage USers</a>
+                <a href="<?= base_url('admin/users/create') ?>" class="btn btn-info btn-block">
+                    <i class="fas fa-plus"></i> Create New User
+                </a>
             </div>
         </div>
     </div>

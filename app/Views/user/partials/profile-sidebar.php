@@ -13,7 +13,7 @@
 
     <div class="row g-2">
         <div class="col-12 d-flex justify-content-center">
-            <a href="<?= base_url('profile/change-profile-picture') ?>" class="btn btn-outline-primary btn-sm p-2" style="border-width: 2px;">
+            <a href="<?= base_url('profile/update/profile-picture') ?>" class="btn btn-outline-primary btn-sm p-2" style="border-width: 2px;">
                 <small><i class="fas fa-camera me-1"></i> CHANGE PHOTO</small>
             </a>
         </div>

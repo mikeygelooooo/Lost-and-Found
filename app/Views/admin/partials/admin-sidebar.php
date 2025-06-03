@@ -13,44 +13,26 @@
 
                 <li class="nav-item">
                     <a href="<?= base_url('admin/dashboard') ?>" class="nav-link">
-                        <i class="nav-icon fas fa-dashboard"></i>
+                        <i class="nav-icon fas fa-tv"></i>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-circle-question"></i>
-                        <p>Lost Item Reports</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-flag"></i>
-                        <p>Found Item Reports</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-hourglass"></i>
-                        <p>Pending Reports</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-user-check"></i>
-                        <p>Resolved Reports</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <i class="nav-icon fas fa-clipboard-list"></i>
-                        <p>Audit Logs</p>
+                        <p>Reports Management</p>
                     </a>
                 </li>
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-users"></i>
                         <p>User Management</p>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-clipboard-list"></i>
+                        <p>Audit Logs</p>
                     </a>
                 </li>
 

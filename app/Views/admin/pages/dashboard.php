@@ -16,8 +16,8 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-danger">
                 <div class="inner">
-                    <h3>152</h3>
-                    <p>Lost Items</p>
+                    <h3><?= esc($lost_count); ?></h3>
+                    <p>Lost Reports</p>
                 </div>
                 <div class="icon"><i class="fas fa-search"></i></div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
@@ -30,8 +30,8 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-success">
                 <div class="inner">
-                    <h3>98</h3>
-                    <p>Found Items</p>
+                    <h3><?= esc($found_count); ?></h3>
+                    <p>Found Reports</p>
                 </div>
                 <div class="icon"><i class="fas fa-box"></i></div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
@@ -44,24 +44,24 @@
         <div class="col-lg-3 col-6">
             <div class="small-box bg-warning">
                 <div class="inner">
-                    <h3>34</h3>
-                    <p>Pending Claims</p>
+                    <h3><?= esc($pending_count); ?></h3>
+                    <p>Pending Reports</p>
                 </div>
                 <div class="icon"><i class="fas fa-hourglass-half"></i></div>
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
             <div>
-                <a href="#" class="btn btn-warning btn-block"><i class="fas fa-search"></i> Match Items</a>
+                <a href="#" class="btn btn-warning btn-block"><i class="fas fa-search"></i> View Reports</a>
             </div>
         </div>
 
         <div class="col-lg-3 col-6">
             <div class="small-box bg-info text-dark">
                 <div class="inner">
-                    <h3>76</h3>
-                    <p>Resolved Cases</p>
+                    <h3><?= esc($total_users); ?></h3>
+                    <p>Active Users</p>
                 </div>
-                <div class="icon"><i class="fas fa-check-circle"></i></div>
+                <div class="icon"><i class="fas fa-users"></i></div>
                 <a href="#" class="small-box-footer">
                     <span class="text-dark">
                         More info <i class="fas fa-arrow-circle-right"></i>
@@ -69,22 +69,21 @@
                 </a>
             </div>
             <div>
-                <a href="#" class="btn btn-info btn-block"><i class="fas fa-chart-bar"></i> View Reports</a>
+                <a href="#" class="btn btn-info btn-block"><i class="fas fa-user-gear"></i> Manage USers</a>
             </div>
         </div>
     </div>
 </div>
 
-<div class="container mt-5">
+<div class="container-fluid mt-5">
     <hr class="border border-1 border-dark">
 </div>
-
 
 <div class="content-header">
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-6">
-                <h1 class="m-0">Recent Item Reports</h1>
+                <h1 class="m-0">Report Analytics</h1>
             </div>
         </div>
     </div>
@@ -92,8 +91,63 @@
 
 <div class="container-fluid">
     <div class="row">
+        <!-- Left: Bar Chart -->
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline card-success h-100">
+                <div class="card-header">
+                    <h3 class="card-title m-0">Reports by Type & Category</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="barChart" height="300" data-type-category-data='<?= esc(json_encode($typeCategoryData), 'attr') ?>'></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Middle: Line Chart -->
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline card-primary h-100">
+                <div class="card-header">
+                    <h3 class="card-title m-0">Monthly Report Trends</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="lineChart" height="300" data-monthly-reports='<?= esc(json_encode($monthlyReports), 'attr') ?>'></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Donut Chart -->
+        <div class="col-lg-4 mb-4">
+            <div class="card card-outline card-warning h-100">
+                <div class="card-header">
+                    <h3 class="card-title m-0">Report Status Overview</h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="donutChart" height="300" data-report-status-data='<?= esc(json_encode($reportStatusData), 'attr') ?>'></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid mt-5">
+    <hr class="border border-1 border-dark">
+</div>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <h1 class="m-0">Recent Reports</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container-fluid">
+    <div class="row">
         <div class="col-md-12">
-            <div class="card shadow-sm border-0">
+            <div class="card shadow border-0">
                 <div class="card-header bg-white pb-0 border-bottom-0">
                     <ul class="nav nav-underline nav-fill rounded-top p-2" id="itemTabs" role="tablist">
                         <li class="nav-item" role="presentation">
@@ -114,6 +168,7 @@
                     </ul>
                 </div>
                 <div class="tab-content" id="itemTabsContent">
+                    <!-- All Items Tab -->
                     <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="all-tab">
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -124,6 +179,7 @@
                                             <th scope="col" class="py-2">Item</th>
                                             <th scope="col" class="py-2">Report Type</th>
                                             <th scope="col" class="py-2">Category</th>
+                                            <th scope="col" class="py-2">Status</th>
                                             <th scope="col" class="py-2">Date Lost/Found</th>
                                             <th scope="col" class="py-2">Location</th>
                                             <th scope="col" class="text-center pe-3 py-2">Actions</th>
@@ -135,8 +191,70 @@
                                                 <tr class="text-nowrap">
                                                     <td class="ps-3"><?= esc($report['id']) ?></td>
                                                     <td><?= esc($report['item_name']) ?></td>
-                                                    <td><?= esc($report['report_type']) ?></td>
+                                                    <td>
+                                                        <span class="badge bg-<?= $report['report_type'] === 'lost' ? 'danger' : 'success' ?>">
+                                                            <?= ucfirst($report['report_type']) ?>
+                                                        </span>
+                                                    </td>
                                                     <td><?= esc($report['category']) ?></td>
+                                                    <td>
+                                                        <span class="badge text-dark bg-<?= $report['status'] === 'resolved' ? 'info' : 'warning' ?>">
+                                                            <?= ucfirst($report['status']) ?>
+                                                        </span>
+                                                    </td>
+                                                    <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
+                                                    <td class="text-secondary"><?= esc($report['location']) ?></td>
+                                                    <td class="text-center pe-3">
+                                                        <a href="<?= base_url('admin/reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-dark rounded px-2">
+                                                            <i class="fas fa-eye"></i> Details
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <tr>
+                                                <td colspan="8" class="text-center text-secondary">No reports available.</td>
+                                            </tr>
+                                        <?php endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card-footer border-top text-center py-2">
+                            <a href="<?= base_url('admin/reports') ?>" class="btn btn-secondary">
+                                <i class="fas fa-list-ul me-1"></i>View All Reports
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Lost Items Tab -->
+                    <div class="tab-pane fade" id="lost" role="tabpanel" aria-labelledby="lost-tab">
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead>
+                                        <tr class="bg-light text-nowrap align-middle">
+                                            <th scope="col" class="ps-3 py-2">#</th>
+                                            <th scope="col" class="py-2">Item</th>
+                                            <th scope="col" class="py-2">Category</th>
+                                            <th scope="col" class="py-2">Status</th>
+                                            <th scope="col" class="py-2">Date Lost</th>
+                                            <th scope="col" class="py-2">Location</th>
+                                            <th scope="col" class="text-center pe-3 py-2">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if (!empty($lost_reports)): ?>
+                                            <?php foreach ($lost_reports as $report): ?>
+                                                <tr class="text-nowrap">
+                                                    <td class="ps-3"><?= esc($report['id']) ?></td>
+                                                    <td><?= esc($report['item_name']) ?></td>
+                                                    <td><?= esc($report['category']) ?></td>
+                                                    <td>
+                                                        <span class="badge text-dark bg-<?= $report['status'] === 'resolved' ? 'info' : 'warning' ?>">
+                                                            <?= ucfirst($report['status']) ?>
+                                                        </span>
+                                                    </td>
                                                     <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['location']) ?></td>
                                                     <td class="text-center pe-3">
@@ -155,54 +273,14 @@
                                 </table>
                             </div>
                         </div>
-                        <div class="card-footer border-top text-center py-4">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="lost" role="tabpanel" aria-labelledby="lost-tab">
-                        <div class="card-body p-0">
-                            <div class="table-responsive">
-                                <table class="table table-hover mb-0">
-                                    <thead>
-                                        <tr class="bg-light text-nowrap align-middle">
-                                            <th scope="col" class="ps-3 py-2">#</th>
-                                            <th scope="col" class="py-2">Item</th>
-                                            <th scope="col" class="py-2">Category</th>
-                                            <th scope="col" class="py-2">Date Lost</th>
-                                            <th scope="col" class="py-2">Location</th>
-                                            <th scope="col" class="text-center pe-3 py-2">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <?php if (!empty($lost_reports)): ?>
-                                            <?php foreach ($lost_reports as $report): ?>
-                                                <tr class="text-nowrap">
-                                                    <td class="ps-3"><?= esc($report['id']) ?></td>
-                                                    <td><?= esc($report['item_name']) ?></td>
-                                                    <td><?= esc($report['category']) ?></td>
-                                                    <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
-                                                    <td class="text-secondary"><?= esc($report['location']) ?></td>
-                                                    <td class="text-center pe-3">
-                                                        <a href="<?= base_url('admin/reports/details/' . $report['id']) ?>" class="btn btn-sm btn-outline-dark rounded px-2">
-                                                            <i class="fas fa-eye"></i> Details
-                                                        </a>
-                                                    </td>
-                                                </tr>
-                                            <?php endforeach; ?>
-                                        <?php else: ?>
-                                            <tr>
-                                                <td colspan="6" class="text-center text-secondary">No reports available.</td>
-                                            </tr>
-                                        <?php endif; ?>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
                         <div class="card-footer border-top text-center py-2">
-                            <a href="<?= base_url('admin/reports/lost-items') ?>" class="btn btn-secondary">
-                                <i class="fas fa-list-ul me-1"></i>View Lost Reports
+                            <a href="<?= base_url('admin/reports') ?>" class="btn btn-secondary">
+                                <i class="fas fa-list-ul me-1"></i>View All Reports
                             </a>
                         </div>
                     </div>
+
+                    <!-- Found Items Tab -->
                     <div class="tab-pane fade" id="found" role="tabpanel" aria-labelledby="found-tab">
                         <div class="card-body p-0">
                             <div class="table-responsive">
@@ -212,6 +290,7 @@
                                             <th scope="col" class="ps-3 py-2">#</th>
                                             <th scope="col" class="py-2">Item</th>
                                             <th scope="col" class="py-2">Category</th>
+                                            <th scope="col" class="py-2">Status</th>
                                             <th scope="col" class="py-2">Date Found</th>
                                             <th scope="col" class="py-2">Location</th>
                                             <th scope="col" class="text-center pe-3 py-2">Actions</th>
@@ -224,6 +303,11 @@
                                                     <td class="ps-3"><?= esc($report['id']) ?></td>
                                                     <td><?= esc($report['item_name']) ?></td>
                                                     <td><?= esc($report['category']) ?></td>
+                                                    <td>
+                                                        <span class="badge text-dark bg-<?= $report['status'] === 'resolved' ? 'info' : 'warning' ?>">
+                                                            <?= ucfirst($report['status']) ?>
+                                                        </span>
+                                                    </td>
                                                     <td class="text-secondary"><?= esc($report['date_of_event']) ?></td>
                                                     <td class="text-secondary"><?= esc($report['location']) ?></td>
                                                     <td class="text-center pe-3">
@@ -235,7 +319,7 @@
                                             <?php endforeach; ?>
                                         <?php else: ?>
                                             <tr>
-                                                <td colspan="6" class="text-center text-secondary">No reports available.</td>
+                                                <td colspan="7" class="text-center text-secondary">No reports available.</td>
                                             </tr>
                                         <?php endif; ?>
                                     </tbody>
@@ -243,14 +327,19 @@
                             </div>
                         </div>
                         <div class="card-footer border-top text-center py-2">
-                            <a href="<?= base_url('admin/reports/lost-items') ?>" class="btn btn-secondary">
-                                <i class="fas fa-list-ul me-1"></i>View Found Reports
+                            <a href="<?= base_url('admin/reports') ?>" class="btn btn-secondary">
+                                <i class="fas fa-list-ul me-1"></i>View All Reports
                             </a>
                         </div>
                     </div>
-                </div>
+
+                </div> <!-- End tab content -->
             </div>
         </div>
     </div>
 </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="<?= base_url('assets/js/dashboard-charts.js') ?>"></script>
 <?= $this->endSection() ?>

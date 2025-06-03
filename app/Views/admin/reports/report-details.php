@@ -6,20 +6,9 @@
         <div class="row border border-3 px-2 mb-4">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">
-                    <a href="<?= base_url('admin/dashboard') ?>" class="text-decoration-none text-dark">
-                        Dashboard
+                    <a href="<?= base_url('admin/reports') ?>" class="text-decoration-none text-dark">
+                        Reports
                     </a>
-                </li>
-                <li class="breadcrumb-item">
-                    <?php if ($report['report_type'] == 'Lost') : ?>
-                        <a href="<?= base_url('admin/reports/lost-items') ?>" class="text-decoration-none text-dark">
-                            Lost Items
-                        </a>
-                    <?php else : ?>
-                        <a href="<?= base_url('admin/reports/found-items') ?>" class="text-decoration-none text-dark">
-                            Found Items
-                        </a>
-                    <?php endif; ?>
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">
                     Report #<?= esc($report['id']) ?>

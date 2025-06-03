@@ -24,13 +24,38 @@ class ReportsModel extends Model
         'updated_at'
     ];
 
-    // Landing Page Queries
+    // General Queries
+    public function getAllReports()
+    {
+        return $this->where('status !=', 'resolved')
+            ->select('reports.*')
+            ->orderBy('reports.created_at', 'DESC') // Order by latest first
+            ->findAll();
+    }
+
+    public function getReportById($id)
+    {
+        return $this->select('reports.*, CONCAT(users.first_name, " ", users.last_name) as reported_by_name, users.email as reported_by_email, users.phone_number as reported_by_phone')
+            ->join('users', 'users.id = reports.reported_by', 'left')
+            ->where('reports.id', $id)
+            ->first();
+    }
+
+    // User Website Queries
     public function landingAllReports()
     {
         return $this->where('status !=', 'resolved')
             ->select('reports.*')
             ->orderBy('reports.created_at', 'DESC') // Order by latest first
             ->limit(8) // Limit to 8 results
+            ->findAll();
+    }
+
+    public function getReportsByUser($userId)
+    {
+        return $this->where('reported_by', $userId)
+            ->select('reports.*')
+            ->orderBy('reports.created_at', 'DESC')
             ->findAll();
     }
 
@@ -61,16 +86,6 @@ class ReportsModel extends Model
             ->findAll();
     }
 
-    // All Reports
-    public function getAllReports()
-    {
-        return $this->where('status !=', 'resolved')
-            ->select('reports.*')
-            ->orderBy('reports.created_at', 'DESC') // Order by latest first
-            ->findAll();
-    }
-
-    // Report Type Queries
     public function getLostItems()
     {
         return $this->where('report_type', 'Lost')
@@ -85,23 +100,7 @@ class ReportsModel extends Model
             ->findAll();
     }
 
-    // Report Details
-    public function getReportById($id)
-    {
-        return $this->select('reports.*, CONCAT(users.first_name, " ", users.last_name) as reported_by_name, users.email as reported_by_email, users.phone_number as reported_by_phone')
-            ->join('users', 'users.id = reports.reported_by', 'left')
-            ->where('reports.id', $id)
-            ->first();
-    }
-
-    public function getReportsByUser($userId)
-    {
-        return $this->where('reported_by', $userId)
-            ->select('reports.*')
-            ->orderBy('reports.created_at', 'DESC')
-            ->findAll();
-    }
-
+    // Other Queries
     public function getCategoryEnumValues()
     {
         $db = \Config\Database::connect();

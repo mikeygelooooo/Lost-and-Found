@@ -13,24 +13,13 @@
   - Report lost items with detailed descriptions and photos.
   - Report found items to help reunite them with owners.
   - Search for items matching their lost possessions.
-  - Receive notifications when potential matches are found.
-  - Communicate securely with other users for item returns.
   - Track the status of their reports.
 
-### 2. Community Features
-- Built-in tools to facilitate safe returns:
-  - Secure messaging system between users.
-  - Arranged meetup suggestions at safe public locations.
-  - User verification processes to enhance trust.
-  - Rating system for community members based on successful returns.
-
-### 3. Administrative Controls
+### 2. Administrative Controls
 - A comprehensive admin panel built with AdminLTE for administrators to:
   - View and modify all item reports.
-  - Verify ownership claims for reported items.
   - Manage user accounts and permissions.
   - Monitor system activities and analytics.
-  - Configure system settings and notification rules.
   - Moderate community interactions as needed.
 
 ---

@@ -26,13 +26,15 @@
 
 ## Technical Stack
 
-### 1. Development Framework
-- CodeIgniter 4 (PHP)
+### 1. Frontend Technologies
+- HTML
+- CSS
+- Bootstrap
+- AdminLTE
 
-### 2. Database
+### 2. Backend Technologies
+- PHP
+- CodeIgniter 4
+
+### 3. Database
 - MySQL
-
-### 3. Frontend Technologies
-- Bootstrap for responsive user interface
-- jQuery for enhanced interactivity
-- AdminLTE for administration dashboard
